@@ -1,374 +1,485 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEO_CAFE | Cybernetic Coffee Culture</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEO_CAFE OFFICIAL</title>
     <!-- Google Fonts: Space Grotesk for futuristic style, Inter for clean body text -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --dark-brown: #231510;
-            --mid-brown: #5C4033;
-            --beige: #E6DFD3;
-            --light-cream: #F9F8F6;
-            --accent-glow: rgba(230, 223, 211, 0.2);
-            --font-display: 'Space Grotesk', sans-serif;
-            --font-body: 'Inter', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--light-cream);
-            color: var(--dark-brown);
-            font-family: var(--font-body);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(249, 248, 246, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(35, 21, 16, 0.05);
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            color: var(--dark-brown);
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 3rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark-brown);
-            font-family: var(--font-display);
-            font-weight: 500;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.6;
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 10%;
-            background: radial-gradient(circle at 80% 20%, var(--beige) 0%, var(--light-cream) 60%);
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 600px;
-            z-index: 2;
-        }
-
-        .hero-tag {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 1rem;
-            color: var(--mid-brown);
-            display: inline-block;
-        }
-
-        h1 {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-        }
-
-        h1 span {
-            color: transparent;
-            -webkit-text-stroke: 1px var(--dark-brown);
-        }
-
-        .hero-p {
-            font-size: 1.1rem;
-            margin-bottom: 2.5rem;
-            color: var(--mid-brown);
-            font-weight: 300;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            font-family: var(--font-display);
-            background-color: var(--dark-brown);
-            color: var(--light-cream);
-            padding: 1rem 2.5rem;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: 500;
-            letter-spacing: 2px;
-            font-size: 0.85rem;
-            border-radius: 0;
-            transition: all 0.4s ease;
-            border: 1px solid var(--dark-brown);
-        }
-
-        .cta-btn:hover {
-            background-color: transparent;
-            color: var(--dark-brown);
-            box-shadow: 0 10px 20px var(--accent-glow);
-        }
-
-        /* --- FEATURE/EXPERIENCE SECTION --- */
-        .experience {
-            padding: 8rem 10%;
-            background-color: var(--dark-brown);
-            color: var(--light-cream);
-        }
-
-        .section-header {
-            margin-bottom: 5rem;
-        }
-
-        .section-header h2 {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
-        }
-
-        .card {
-            border: 1px solid rgba(230, 223, 211, 0.1);
-            padding: 3rem 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(5px);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--beige);
-        }
-
-        .card-num {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            color: var(--beige);
-            margin-bottom: 2rem;
-            display: block;
-            opacity: 0.5;
-        }
-
-        .card h3 {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .card p {
-            font-size: 0.95rem;
-            color: var(--beige);
-            opacity: 0.8;
-            font-weight: 300;
-        }
-
-        /* --- MINIMAL MENU PREVIEW --- */
-        .menu-preview {
-            padding: 8rem 10%;
-            background-color: var(--light-cream);
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-top: 3rem;
-        }
-
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            border-bottom: 1px solid rgba(35, 21, 16, 0.1);
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .menu-item-info h4 {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            text-transform: uppercase;
-        }
-
-        .menu-item-info p {
-            font-size: 0.85rem;
-            color: var(--mid-brown);
-            margin-top: 0.25rem;
-        }
-
-        .price {
-            font-family: var(--font-display);
-            font-weight: 700;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            padding: 4rem 10%;
-            background-color: var(--light-cream);
-            border-top: 1px solid rgba(35, 21, 16, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            font-family: var(--font-display);
-            text-transform: uppercase;
-            color: var(--mid-brown);
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 900px) {
-            .grid, .menu-grid {
-                grid-template-columns: 1fr;
-            }
-            h1 {
-                font-size: 3rem;
-            }
-            .nav-links {
-                display: none; /* Simplification for mobile demo */
-            }
-        }
-    </style>
-</head>
-<body>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body>
     <!-- NAVBAR -->
     <nav>
-        <div class="logo">Neo_Café</div>
-        <ul class="nav-links">
-            <li><a href="#hero">Origin</a></li>
-            <li><a href="#experience">System</a></li>
-            <li><a href="#menu">Menu</a></li>
-        </ul>
+      <div class="logo">Neo_<span>Café</span></div>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#connect">Connect</a></li>
+      </ul>
+      <button class="hamburger-menu">
+        <i class="fas fa-bars"></i>
+      </button>
     </nav>
 
     <!-- HERO SECTION -->
     <section class="hero" id="hero">
-        <div class="hero-content">
-            <span class="hero-tag">// Automated Precision. Pure Roast.</span>
-            <h1>Coffee, <span>Re-Engineered</span></h1>
-            <p class="hero-p">Welcome to the future of brewing. Merging minimalist aesthetics with cybernetic precision extraction to deliver the purest cup of origin coffee ever poured.</p>
-            <a href="#menu" class="cta-btn">Initialize Order</a>
+      <div class="hero-container">
+        <div class="hero-content reveal">
+          <span class="hero-tag">Automated Precision. Pure Roast.</span>
+          <h1>Coffee, <span>Re-Engineered</span></h1>
+          <p class="hero-p">
+            Welcome to the future of brewing. Merging minimalist aesthetics with
+            cybernetic precision extraction to deliver the purest cup of origin
+            coffee ever poured.
+          </p>
+          <a href="#menu" class="cta-btn">Initialize Order</a>
         </div>
+        <div class="hero-image reveal">
+          <img
+            src="images/coffee-1.png"
+            alt="A cup of expertly crafted coffee"
+          />
+        </div>
+      </div>
     </section>
 
     <!-- EXPERIENCE SECTION -->
-    <section class="experience" id="experience">
-        <div class="section-header">
-            <h2>The System Blueprint</h2>
+    <section class="experience" id="about">
+      <div class="section-header reveal">
+        <h2>The System Blueprint</h2>
+      </div>
+      <div class="grid">
+        <div class="card reveal">
+          <span class="card-num">01 // PROTOCOL</span>
+          <h3>Laser Extraction</h3>
+          <p>
+            Molecular level water filtration paired with computerized heat
+            mapping ensures maximum flavor compound profile stability.
+          </p>
         </div>
-        <div class="grid">
-            <div class="card">
-                <span class="card-num">01 // PROTOCOL</span>
-                <h3>Laser Extraction</h3>
-                <p>Molecular level water filtration paired with computerized heat mapping ensures maximum flavor compound profile stability.</p>
-            </div>
-            <div class="card">
-                <span class="card-num">02 // ARCHITECTURE</span>
-                <h3>Zen Architecture</h3>
-                <p>A quiet, brutalist-minimalist atmosphere designed to clear sensory clutter and amplify your palate.</p>
-            </div>
-            <div class="card">
-                <span class="card-num">03 // BEANS</span>
-                <h3>Bio-Synthesized Crops</h3>
-                <p>100% ethically tracked, climate-resilient micro-lot single origins sourced from planetary sustainable farms.</p>
-            </div>
+        <div class="card reveal">
+          <span class="card-num">02 // ARCHITECTURE</span>
+          <h3>Zen Architecture</h3>
+          <p>
+            A quiet, brutalist-minimalist atmosphere designed to clear sensory
+            clutter and amplify your palate.
+          </p>
         </div>
+        <div class="card reveal">
+          <span class="card-num">03 // BEANS</span>
+          <h3>Bio-Synthesized Crops</h3>
+          <p>
+            100% ethically tracked, climate-resilient micro-lot single origins
+            sourced from planetary sustainable farms.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- MENU SECTION -->
     <section class="menu-preview" id="menu">
-        <div class="section-header">
-            <h2>The Menu Grid</h2>
-        </div>
-        <div class="menu-grid">
-            <div>
-                <div class="menu-item">
-                    <div class="menu-item-info">
-                        <h4>Cyber_Black</h4>
-                        <p>Sonic-pulsed drip extraction, served at exactly 64°C.</p>
-                    </div>
-                    <span class="price">$6.00</span>
-                </div>
-                <div class="menu-item">
-                    <div class="menu-item-info">
-                        <h4>Beige_Matrix Latte</h4>
-                        <p>Oat emulsion, subtle notes of roasted hazelnut and circuitry warm.</p>
-                    </div>
-                    <span class="price">$7.50</span>
-                </div>
+      <div class="section-header reveal">
+        <h2>The Menu Grid</h2>
+      </div>
+      <div class="menu-grid">
+        <div>
+          <div class="menu-item reveal">
+            <img src="images/coffee-1.png" alt="Cyber Black Coffee" />
+            <div class="menu-item-info">
+              <h4>Cyber_Black</h4>
+              <p>Sonic-pulsed drip extraction, served at exactly 64°C.</p>
             </div>
-            <div>
-                <div class="menu-item">
-                    <div class="menu-item-info">
-                        <h4>Quantum Cortado</h4>
-                        <p>Equal parts compressed espresso and textured cashew cream.</p>
-                    </div>
-                    <span class="price">$6.50</span>
-                </div>
-                <div class="menu-item">
-                    <div class="menu-item-info">
-                        <h4>Cold Sync Nitro</h4>
-                        <p>Pressurized nitrogen-infused cold brew with zero acidity.</p>
-                    </div>
-                    <span class="price">$7.00</span>
-                </div>
+            <span class="price">$6.00</span>
+          </div>
+          <div class="menu-item reveal">
+            <img src="images/coffee-1.png" alt="Beige Matrix Latte" />
+            <div class="menu-item-info">
+              <h4>Beige_Matrix Latte</h4>
+              <p>
+                Oat emulsion, subtle notes of roasted hazelnut and circuitry
+                warm.
+              </p>
             </div>
+            <span class="price">$7.50</span>
+          </div>
+          <div class="menu-item reveal">
+            <img src="images/coffee-1.png" alt="Glitch Brew" />
+            <div class="menu-item-info">
+              <h4>Glitch Brew</h4>
+              <p>An unpredictable, ever-changing single-origin pour-over.</p>
+            </div>
+            <span class="price">$6.75</span>
+          </div>
+          <div class="menu-item reveal">
+            <img src="images/coffee-1.png" alt="Data-Stream Drip" />
+            <div class="menu-item-info">
+              <h4>Data-Stream Drip</h4>
+              <p>Slow-drip cold brew, processed over 24 hours for max data.</p>
+            </div>
+            <span class="price">$7.25</span>
+          </div>
+          <div class="menu-item reveal">
+            <img src="images/coffee-1.png" alt="Hologram Haze" />
+            <div class="menu-item-info">
+              <h4>Hologram Haze</h4>
+              <p>An ethereal, light-bodied espresso with a shimmering crema.</p>
+            </div>
+            <span class="price">$5.50</span>
+          </div>
         </div>
+        <div>
+          <div class="menu-item reveal">
+            <img src="images/coffee-1.png" alt="Quantum Cortado" />
+            <div class="menu-item-info">
+              <h4>Quantum Cortado</h4>
+              <p>Equal parts compressed espresso and textured cashew cream.</p>
+            </div>
+            <span class="price">$6.50</span>
+          </div>
+          <div class="menu-item reveal">
+            <img src="images/coffee-1.png" alt="Cold Sync Nitro" />
+            <div class="menu-item-info">
+              <h4>Cold Sync Nitro</h4>
+              <p>Pressurized nitrogen-infused cold brew with zero acidity.</p>
+            </div>
+            <span class="price">$7.00</span>
+          </div>
+          <div class="menu-item reveal">
+            <img src="images/coffee-1.png" alt="Firewall Flat White" />
+            <div class="menu-item-info">
+              <h4>Firewall Flat White</h4>
+              <p>
+                A robust microfoam barrier over a double shot of dark roast.
+              </p>
+            </div>
+            <span class="price">$7.00</span>
+          </div>
+          <div class="menu-item reveal">
+            <img src="images/coffee-1.png" alt="Kernel Cappuccino" />
+            <div class="menu-item-info">
+              <h4>Kernel Cappuccino</h4>
+              <p>
+                The core system of coffee: espresso, steamed milk, and foam.
+              </p>
+            </div>
+            <span class="price">$6.75</span>
+          </div>
+          <div class="menu-item reveal">
+            <img src="images/coffee-1.png" alt="RAM Roast" />
+            <div class="menu-item-info">
+              <h4>RAM Roast</h4>
+              <p>A quick, high-caffeine shot for rapid access memory boost.</p>
+            </div>
+            <span class="price">$5.00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section class="gallery" id="gallery">
+      <div class="section-header reveal">
+        <h2>Solid Customers Gallery</h2>
+        <p>Thank you for always supporting us.</p>
+      </div>
+      <div class="gallery-grid">
+        <!-- Replace image paths with your actual images -->
+        <div class="gallery-item item-1 reveal">
+          <img src="images/gallery/1.jpg" alt="Coffee being poured" />
+          <div class="gallery-item-info">
+            <h4>Kaelen V.</h4>
+            <span>Grid 04 // 07.15.2026</span>
+          </div>
+        </div>
+        <div class="gallery-item item-2 reveal">
+          <img src="images/gallery/2.jpg" alt="A cup of latte art" />
+          <div class="gallery-item-info">
+            <h4>Alex R.</h4>
+            <span>Sector-7, Neo-Kyoto // 07.12.2026</span>
+          </div>
+        </div>
+        <div class="gallery-item item-3 reveal">
+          <img src="images/gallery/3.jpg" alt="Interior of the cafe" />
+          <div class="gallery-item-info">
+            <h4>Sila</h4>
+            <span>Cygnus X-1 Outpost // 07.10.2026</span>
+          </div>
+        </div>
+        <div class="gallery-item item-4 reveal">
+          <img src="images/gallery/4.jpg" alt="Close up of espresso machine" />
+          <div class="gallery-item-info">
+            <h4>Dr. Aris Thorne</h4>
+            <span>Titan City, Mars // 07.09.2026</span>
+          </div>
+        </div>
+        <div class="gallery-item item-5 reveal">
+          <img src="images/gallery/5.jpg" alt="Customer enjoying coffee" />
+          <div class="gallery-item-info">
+            <h4>J. 'Glitch' Chen</h4>
+            <span>Aetheria District // 07.05.2026</span>
+          </div>
+        </div>
+        <div class="gallery-item item-6 reveal">
+          <img src="images/gallery/6.jpg" alt="Barista at work" />
+          <div class="gallery-item-info">
+            <h4>Unit 734</h4>
+            <span>Mainframe Core // 07.02.2026</span>
+          </div>
+        </div>
+        <div class="gallery-item item-7 reveal">
+          <img src="images/gallery/7.jpg" alt="Barista at work" />
+          <div class="gallery-item-info">
+            <h4>'Root' Kimura</h4>
+            <span>Data Haven 3 // 06.28.2026</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS SECTION -->
+    <section class="reviews" id="reviews">
+      <div class="section-header reveal">
+        <h2>Field Diagnostics</h2>
+      </div>
+      <div class="reviews-list">
+        <div class="review-card reveal">
+          <div class="review-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i>
+          </div>
+          <p class="review-comment">
+            "The Cyber_Black is a revelation. Pure, unadulterated coffee flavor.
+            The future is now, and it tastes incredible."
+          </p>
+          <div class="review-customer">
+            <div class="customer-info">
+              <h4>Alex R.</h4>
+              <span>Sector-7, Neo-Kyoto</span>
+            </div>
+            <div class="customer-order">Cyber_Black</div>
+          </div>
+        </div>
+        <div class="review-card reveal">
+          <div class="review-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i>
+          </div>
+          <p class="review-comment">
+            "Never had a latte like the Beige_Matrix. It's smooth, with a warmth
+            that feels both organic and synthesized. A true work of art."
+          </p>
+          <div class="review-customer">
+            <div class="customer-info">
+              <h4>J. 'Glitch' Chen</h4>
+              <span>Aetheria District</span>
+            </div>
+            <div class="customer-order">Beige_Matrix Latte</div>
+          </div>
+        </div>
+        <div class="review-card reveal">
+          <div class="review-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star dim"></i>
+          </div>
+          <p class="review-comment">
+            "The Quantum Cortado has the perfect balance. Strong, but incredibly
+            smooth. The atmosphere is also top-notch for deep work."
+          </p>
+          <div class="review-customer">
+            <div class="customer-info">
+              <h4>Dr. Aris Thorne</h4>
+              <span>Titan City, Mars</span>
+            </div>
+            <div class="customer-order">Quantum Cortado</div>
+          </div>
+        </div>
+        <div class="review-card reveal">
+          <div class="review-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i>
+          </div>
+          <p class="review-comment">
+            "I run on Cold Sync Nitro. Zero acidity means I can have three a
+            day. It's the cleanest energy boost available anywhere."
+          </p>
+          <div class="review-customer">
+            <div class="customer-info">
+              <h4>Kaelen V.</h4>
+              <span>Grid 04</span>
+            </div>
+            <div class="customer-order">Cold Sync Nitro</div>
+          </div>
+        </div>
+        <div class="review-card reveal">
+          <div class="review-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star dim"></i
+            ><i class="fas fa-star dim"></i>
+          </div>
+          <p class="review-comment">
+            "Glitch Brew is a fun concept, though a bit unpredictable for my
+            morning routine. Still, a solid cup and a unique experience."
+          </p>
+          <div class="review-customer">
+            <div class="customer-info">
+              <h4>Sila</h4>
+              <span>Cygnus X-1 Outpost</span>
+            </div>
+            <div class="customer-order">Glitch Brew</div>
+          </div>
+        </div>
+        <!-- Hidden Reviews -->
+        <div class="review-card hidden">
+          <div class="review-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star dim"></i>
+          </div>
+          <p class="review-comment">
+            "The Firewall Flat White is my go-to defensive protocol against a
+            long day. The microfoam is a work of art."
+          </p>
+          <div class="review-customer">
+            <div class="customer-info">
+              <h4>Unit 734</h4>
+              <span>Mainframe Core</span>
+            </div>
+            <div class="customer-order">Firewall Flat White</div>
+          </div>
+        </div>
+        <div class="review-card hidden">
+          <div class="review-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star dim"></i><i class="fas fa-star dim"></i
+            ><i class="fas fa-star dim"></i>
+          </div>
+          <p class="review-comment">
+            "Hologram Haze was... interesting. Very light, almost too ethereal.
+            I prefer something with more substance, but the presentation was
+            stunning."
+          </p>
+          <div class="review-customer">
+            <div class="customer-info">
+              <h4>Nyx</h4>
+              <span>The Shadow Net</span>
+            </div>
+            <div class="customer-order">Hologram Haze</div>
+          </div>
+        </div>
+        <div class="review-card hidden">
+          <div class="review-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i>
+          </div>
+          <p class="review-comment">
+            "The RAM Roast is exactly what it promises: a quick, powerful jolt.
+            Perfect for debugging code on a tight deadline."
+          </p>
+          <div class="review-customer">
+            <div class="customer-info">
+              <h4>'Root' Kimura</h4>
+              <span>Data Haven 3</span>
+            </div>
+            <div class="customer-order">RAM Roast</div>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-footer reveal">
+        <button id="see-more-reviews" class="cta-btn outline">
+          See More Diagnostics
+        </button>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="connect">
+      <div class="section-header reveal">
+        <h2>Establish Connection</h2>
+      </div>
+      <div class="contact-container">
+        <div class="contact-info reveal">
+          <img
+            src="images/contact/contact-image.jpg"
+            alt="Neo Cafe interior sketch"
+          />
+          <h3>System Link Open</h3>
+          <p>
+            Have a query, a suggestion, or a complex coffee algorithm to share?
+            Our lines are open. We are always ready to interface with fellow
+            connoisseurs of the craft.
+          </p>
+        </div>
+        <div class="contact-form reveal">
+          <form>
+            <input type="text" name="name" placeholder="Full Name" required />
+            <input type="email" name="email" placeholder="Email" required />
+            <textarea
+              name="message"
+              rows="6"
+              placeholder="Your Message"
+              required
+            ></textarea>
+            <button type="submit" class="cta-btn">Transmit Data</button>
+          </form>
+        </div>
+      </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
+      <div class="footer-container">
+        <div class="footer-col reveal">
+          <div class="logo">Neo_<span>Café</span></div>
+          <p>
+            Cybernetic Coffee Culture. Merging minimalist aesthetics with
+            precision extraction for the purest cup.
+          </p>
+        </div>
+        <div class="footer-col reveal">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-col reveal">
+          <h4>Connect</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+            <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
         <div>© 2026 Neo_Café Corp. All rights reserved.</div>
         <div>[ System: Operational ]</div>
+      </div>
     </footer>
 
-</body>
+    <script src="js/animation.js"></script> <!-- Link to the external JavaScript file for animations -->
+
+  </body>
 </html>

@@ -6,6 +6,8 @@
 
     <title>DreamLodin Portfolio</title>
 
+    <script>document.documentElement.classList.add('js')</script>
+
     <!-- Google Fonts: Zain (elegant headings) + Nunito (rounded body text) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,6 +72,49 @@
         /* Elegant font pairing -- Zain for headings, Nunito for body */
         h1, h2, h3, h4, h5, h6, .font-display {
             font-family: 'Zain', 'Segoe UI', sans-serif;
+        }
+
+        /* ===== Entrance animation -- plays once on initial page load ===== */
+        html.js .load-item {
+            opacity: 0;
+        }
+
+        html.load-ready .load-item {
+            animation: riseIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+            animation-delay: calc(var(--d, 0) * 1ms);
+        }
+
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sidebar -- subtle fade + slide from the left, desktop only so the
+           mobile drawer transform (-translate-x-full) is never affected */
+        @media (min-width: 1024px) {
+            html.js #sidebar { opacity: 0; }
+
+            html.load-ready #sidebar {
+                animation: slideInLeft 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-14px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Accessibility -- show everything instantly for reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            html.js .load-item,
+            html.js #sidebar {
+                opacity: 1;
+            }
+
+            html.load-ready .load-item,
+            html.load-ready #sidebar {
+                animation: none;
+            }
         }
 
         /* Hide scrollbar */
@@ -450,21 +495,21 @@
                     <!-- Hero text -->
                     <div>
 
-                        <p class="text-[10px] font-semibold tracking-[0.2em] text-slate-300">WELCOME TO MY PORTFOLIO</p>
+                        <p class="load-item text-[10px] font-semibold tracking-[0.2em] text-slate-300" style="--d:380">WELCOME TO MY PORTFOLIO</p>
 
-                        <h2 class="mt-2 text-2xl font-bold leading-tight text-white sm:text-3xl">
+                        <h2 class="load-item mt-2 text-2xl font-bold leading-tight text-white sm:text-3xl" style="--d:420">
                             Hi, I'm <span class="leaf-text">DreamLodin</span>
                         </h2>
 
-                        <h3 class="mt-1 text-base font-semibold text-white sm:text-lg">Web Developer & Designer</h3>
+                        <h3 class="load-item mt-1 text-base font-semibold text-white sm:text-lg" style="--d:460">Web Developer & Designer</h3>
 
-                        <p class="mt-3 max-w-xl text-sm leading-6 text-slate-400">
+                        <p class="load-item mt-3 max-w-xl text-sm leading-6 text-slate-400" style="--d:500">
                             I build clean, modern and responsive web experiences.
                             Passionate about turning ideas into real projects with code and creativity.
                         </p>
 
                         <!-- Buttons -->
-                        <div class="mt-4 flex flex-wrap gap-3">
+                        <div class="load-item mt-4 flex flex-wrap gap-3" style="--d:540">
 
                             <a href="#projects" class="inline-flex items-center gap-2 rounded-full bg-leaf px-4 py-2.5 text-sm font-semibold text-btntext transition hover:bg-leaf/80">
                                 View My Projects
@@ -482,7 +527,7 @@
 
 
                     <!-- Stats card -->
-                    <div class="w-32 rounded-xl border border-leaf/40 bg-pine/90 px-2.5 py-2.5 shadow-lg sm:w-36">
+                    <div class="load-item w-32 rounded-xl border border-leaf/40 bg-pine/90 px-2.5 py-2.5 shadow-lg sm:w-36" style="--d:580">
 
                         <div class="flex items-center justify-between gap-2">
                             <span class="text-[10px] text-slate-400">Projects</span>
@@ -507,7 +552,7 @@
 <!-- SUMMARY CARDS -->
             <section class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
 
-                <div id="github-card" class="rounded-xl border border-white/10 bg-pine p-4">
+                <div id="github-card" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:460">
                     <div class="flex items-center gap-3">
                         <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-leaf/10 text-lg">
                             <svg class="hi h-5 w-5" aria-hidden="true"><use href="#hi-github"/></svg>
@@ -524,7 +569,7 @@
                 </div>
 
 
-                <div id="skills" class="rounded-xl border border-white/10 bg-pine p-4">
+                <div id="skills" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:520">
                     <div class="flex items-center gap-3">
                         <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-leaf/10 text-lg">
                             <svg class="hi h-5 w-5" aria-hidden="true"><use href="#hi-wrench-screwdriver"/></svg>
@@ -541,7 +586,7 @@
                 </div>
 
 
-                <div id="stack" class="rounded-xl border border-white/10 bg-pine p-4">
+                <div id="stack" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:580">
                     <div class="flex items-center gap-3">
                         <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-leaf/10 text-lg">
                             <svg class="hi h-5 w-5" aria-hidden="true"><use href="#hi-squares-2x2"/></svg>
@@ -558,7 +603,7 @@
                 </div>
 
 
-                <div class="rounded-xl border border-white/10 bg-pine p-4">
+                <div class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:640">
                     <div class="flex items-center gap-3">
                         <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-leaf/10 text-lg">
                             <svg class="hi h-5 w-5" aria-hidden="true"><use href="#hi-bookmark"/></svg>
@@ -579,7 +624,7 @@
             <section class="mt-3 grid gap-3 lg:grid-cols-[1.6fr_1fr]">
 
                 <!-- PROJECTS -->
-                <div id="projects" class="rounded-xl border border-white/10 bg-pine p-4">
+                <div id="projects" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:560">
 
                     <div class="flex items-center justify-between">
 
@@ -660,7 +705,7 @@
                     </div>
                 </div>
 <!-- ACTIVITY -->
-                <div id="experience" class="rounded-xl border border-white/10 bg-pine p-4">
+                <div id="experience" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:620">
 
                     <h3 class="text-base font-semibold text-white">
                         Recent Activity
@@ -704,7 +749,7 @@
             <section class="mt-3 grid gap-3 lg:grid-cols-3">
 
                 <!-- GITHUB CONTRIBUTIONS -->
-                <div id="github" class="rounded-xl border border-white/10 bg-pine p-4">
+                <div id="github" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:640">
 
                     <span class="text-[10px] tracking-[0.2em] text-leaf">GITHUB</span>
                     <h2 class="mt-1 text-sm font-semibold text-white">
@@ -766,7 +811,7 @@
 
 
                 <!-- SKILLS -->
-                <div id="skills-content" class="rounded-xl border border-white/10 bg-pine p-4">
+                <div id="skills-content" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:700">
 
                     <span class="text-[10px] tracking-[0.2em] text-leaf">PROFICIENCY</span>
                     <h2 class="mt-1 text-sm font-semibold text-white">Skills</h2>
@@ -808,7 +853,7 @@
 
 
                 <!-- TECH STACK -->
-                <div id="stack-content" class="rounded-xl border border-white/10 bg-pine p-4">
+                <div id="stack-content" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:760">
 
                     <span class="text-[10px] tracking-[0.2em] text-leaf">TOOLS</span>
                     <h2 class="mt-1 text-sm font-semibold text-white">Tech Stack</h2>
@@ -831,7 +876,7 @@
 <!-- GALLERY -->
             <section class="mt-3">
 
-                <div id="gallery" class="rounded-xl border border-white/10 bg-pine p-4">
+                <div id="gallery" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:780">
 
                     <h2 class="text-sm font-semibold text-white">Gallery</h2>
 
@@ -849,7 +894,7 @@
 
 
             <!-- FOOTER -->
-            <footer class="py-3 text-center text-xs text-slate-600">
+            <footer class="load-item py-3 text-center text-xs text-slate-600" style="--d:820">
 
                 © 2026 DreamLodin. All rights reserved.
 
@@ -923,6 +968,13 @@
         }
 
         applyTheme();
+
+        /* Entrance animation -- runs once per page load, never re-triggers on scroll */
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+                document.documentElement.classList.add("load-ready");
+            });
+        });
 
     </script>
 

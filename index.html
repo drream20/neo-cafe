@@ -393,6 +393,14 @@
                 <!-- Soft leaf glow -- bottom-left -->
                 <div class="absolute -bottom-28 -left-28 h-64 w-64 rounded-full bg-leaf/3 blur-2xl pointer-events-none"></div>
 
+                <!-- Background profile image -->
+                <img src="assets/profile.png" alt=""
+                     class="pointer-events-none absolute right-0 top-3/4 -translate-y-1/2 max-h-104 object-contain "
+                     onerror="this.style.display='none'">
+
+                <!-- Background fade (left) -->
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink via-ink/60 to-transparent"></div>
+
                 <div class="relative grid items-center gap-8 lg:grid-cols-[1fr_auto]">
 
                     <!-- Hero text -->
@@ -429,35 +437,22 @@
                     </div>
 
 
-                    <!-- Hero image + stats -->
-                    <div class="flex items-center justify-center gap-3">
+                    <!-- Stats card -->
+                    <div class="w-32 rounded-xl border border-leaf/40 bg-pine/90 px-2.5 py-2.5 shadow-lg sm:w-36">
 
-                        <div class="relative flex h-full w-full items-center justify-center rounded-2xl border border-leaf/40 bg-leaf/5 sm:h-36 sm:w-44">
-
-                            <div class="h-full w-full overflow-hidden rounded-2xl border border-leaf/50 bg-pine">
-                                <img src="assets/profile.png" alt="Profile" class="h-full w-full object-cover" onerror="this.style.display='none'">
-                            </div>
-
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-[10px] text-slate-400">Projects</span>
+                            <span class="text-xs font-bold text-leaf">120+</span>
                         </div>
 
-                        <!-- Stats card -->
-                        <div class="w-32 rounded-xl border border-leaf/40 bg-pine/90 px-2.5 py-2.5 shadow-lg sm:w-36">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-[10px] text-slate-400">Experience</span>
+                            <span class="text-xs font-bold text-leaf">8+ yrs</span>
+                        </div>
 
-                            <div class="flex items-center justify-between gap-2">
-                                <span class="text-[10px] text-slate-400">Projects</span>
-                                <span class="text-xs font-bold text-leaf">120+</span>
-                            </div>
-
-                            <div class="flex items-center justify-between gap-2">
-                                <span class="text-[10px] text-slate-400">Experience</span>
-                                <span class="text-xs font-bold text-leaf">8+ yrs</span>
-                            </div>
-
-                            <div class="flex items-center justify-between gap-2">
-                                <span class="text-[10px] text-slate-400">Technologies</span>
-                                <span class="text-xs font-bold text-leaf">15+</span>
-                            </div>
-
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-[10px] text-slate-400">Technologies</span>
+                            <span class="text-xs font-bold text-leaf">15+</span>
                         </div>
 
                     </div>

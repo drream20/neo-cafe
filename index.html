@@ -40,8 +40,8 @@
         }
 
         html.light {
-            --ink: 255 255 255;     /* #ffffff  white background  */
-            --pine: 232 232 232;    /* #e8e8e8  light gray cards  */
+            --ink: 245 246 248;     /* #f5f6f8  soft off-white background */
+            --pine: 235 237 240;    /* #ebedf0  light gray cards          */
             --leaf: 37 214 43;      /* #25D62B  accents            */
             --btntext: 29 29 29;    /* #1d1d1d  text on green      */
         }
@@ -76,6 +76,26 @@
 
         .leaf-text {
             color: rgb(var(--leaf));
+        }
+
+        /* Hero profile glow -- gradient panel behind the background image */
+        .hero-profile-glow {
+            background: radial-gradient(
+                closest-side,
+                rgb(var(--leaf) / 0.30),
+                rgb(var(--leaf) / 0.10) 55%,
+                transparent 78%
+            );
+        }
+
+        /* Light theme -- softer but still visible on the white background */
+        html.light .hero-profile-glow {
+            background: radial-gradient(
+                closest-side,
+                rgb(var(--leaf) / 0.16),
+                rgb(var(--leaf) / 0.06) 55%,
+                transparent 78%
+            );
         }
 
         .sidebar-link.active {
@@ -394,12 +414,14 @@
                 <div class="absolute -bottom-28 -left-28 h-64 w-64 rounded-full bg-leaf/3 blur-2xl pointer-events-none"></div>
 
                 <!-- Background profile image -->
-                <img src="assets/profile.png" alt=""
-                     class="pointer-events-none absolute right-0 top-3/4 -translate-y-1/2 max-h-104 object-contain "
-                     onerror="this.style.display='none'">
+                <div class="hero-profile-glow pointer-events-none absolute right-0 top-3/4 -translate-y-1/2 rounded-3xl p-4">
+                    <img src="assets/profile.png" alt=""
+                         class="max-h-104 object-contain"
+                         onerror="this.style.display='none'">
+                </div>
 
                 <!-- Background fade (left) -->
-                <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink via-ink/60 to-transparent"></div>
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink via-ink/20 to-transparent"></div>
 
                 <div class="relative grid items-center gap-8 lg:grid-cols-[1fr_auto]">
 
@@ -557,7 +579,7 @@
                         <article class="overflow-hidden rounded-lg border border-white/10 bg-ink">
 
                             <div class="aspect-video bg-pine">
-                                <img src="assets/project1.jpg" alt="School Voting System" class="h-full w-full object-cover">
+                                <img src="assets/empire.png" alt="School Voting System" class="h-full w-full object-cover">
                             </div>
 
                             <div class="p-3">
@@ -577,7 +599,7 @@
                         <article class="overflow-hidden rounded-lg border border-white/10 bg-ink">
 
                             <div class="aspect-video bg-pine">
-                                <img src="assets/project2.jpg" alt="Portfolio Website" class="h-full w-full object-cover">
+                                <img src="assets/Screenshot 2026-07-30 170618.png" alt="Portfolio Website" class="h-full w-full object-cover">
                             </div>
 
                             <div class="p-3">

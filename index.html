@@ -74,6 +74,97 @@
             font-family: 'Zain', 'Segoe UI', sans-serif;
         }
 
+        /* ===== GitHub contribution heatmap ===== */
+        .heatmap-scroll {
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: thin;
+            scrollbar-color: rgb(var(--leaf) / 0.35) transparent;
+        }
+
+        .heatmap-scroll::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        .heatmap-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .heatmap-scroll::-webkit-scrollbar-thumb {
+            background: rgb(var(--leaf) / 0.35);
+            border-radius: 999px;
+        }
+
+        .gh-grid {
+            display: grid;
+            grid-auto-flow: column;
+            grid-template-rows: repeat(7, 11px);
+            grid-auto-columns: 11px;
+            gap: 3px;
+            width: max-content;
+        }
+
+        .gh-cell {
+            width: 11px;
+            height: 11px;
+            border-radius: 2.5px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .gh-cell:hover {
+            transform: scale(1.25);
+            box-shadow: 0 0 0 1px rgb(var(--leaf) / 0.5);
+        }
+
+        .gh-empty { background: transparent; }
+
+        .gh-l0 { background: rgb(var(--leaf) / 0.06); }
+        .gh-l1 { background: rgb(var(--leaf) / 0.25); }
+        .gh-l2 { background: rgb(var(--leaf) / 0.45); }
+        .gh-l3 { background: rgb(var(--leaf) / 0.7); }
+        .gh-l4 { background: rgb(var(--leaf)); }
+
+        .gh-skel {
+            background: rgb(var(--leaf) / 0.05);
+            animation: ghPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes ghPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .gh-months {
+            position: relative;
+            height: 14px;
+            margin-bottom: 3px;
+        }
+
+        .gh-month {
+            position: absolute;
+            top: 0;
+            font-size: 10px;
+            line-height: 14px;
+            color: rgb(var(--leaf) / 0.55);
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .gh-weekdays {
+            display: grid;
+            grid-template-rows: repeat(7, 11px);
+            gap: 3px;
+            padding-top: 17px;
+        }
+
+        .gh-weekdays span {
+            font-size: 10px;
+            line-height: 11px;
+            color: rgb(var(--leaf) / 0.55);
+            user-select: none;
+        }
+
         /* ===== Recent Activity -- scrollable timeline ===== */
         .activity-scroll {
             max-height: 240px;
@@ -812,73 +903,11 @@
                 </div>
 
             </section>
-<!-- GITHUB + SKILLS + TECH STACK -->
-            <section class="mt-3 grid gap-3 lg:grid-cols-3">
-
-                <!-- GITHUB CONTRIBUTIONS -->
-                <div id="github" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:640">
-
-                    <span class="text-[10px] tracking-[0.2em] text-leaf">GITHUB</span>
-                    <h2 class="mt-1 text-sm font-semibold text-white">
-                        Contribution History
-                    </h2>
-
-                    <!-- Contribution bar chart -->
-                    <div class="mt-3 flex items-end justify-between">
-
-                        <div class="h-8 w-2.5 rounded-sm bg-leaf/20"></div>
-                        <div class="h-10 w-2.5 rounded-sm bg-leaf/20"></div>
-                        <div class="h-6 w-2.5 rounded-sm bg-leaf/20"></div>
-                        <div class="h-12 w-2.5 rounded-sm bg-leaf/40"></div>
-                        <div class="h-9 w-2.5 rounded-sm bg-leaf/30"></div>
-                        <div class="h-14 w-2.5 rounded-sm bg-leaf/50"></div>
-                        <div class="h-16 w-2.5 rounded-sm bg-leaf/60"></div>
-                        <div class="h-11 w-2.5 rounded-sm bg-leaf/40"></div>
-                        <div class="h-15 w-2.5 rounded-sm bg-leaf/70"></div>
-                        <div class="h-13 w-2.5 rounded-sm bg-leaf/60"></div>
-                        <div class="h-18 w-2.5 rounded-sm bg-leaf/90"></div>
-                        <div class="h-20 w-2.5 rounded-sm bg-leaf"></div>
-
-                    </div>
-
-                    <!-- Legend -->
-                    <div class="mt-1.5 flex items-center justify-between gap-1 text-[10px] text-slate-500">
-                        <span>Less</span>
-                        <div class="flex items-center gap-1">
-                            <span class="h-2 w-2 rounded-sm bg-leaf/20"></span>
-                            <span class="h-2 w-2 rounded-sm bg-leaf/30"></span>
-                            <span class="h-2 w-2 rounded-sm bg-leaf/50"></span>
-                            <span class="h-2 w-2 rounded-sm bg-leaf/80"></span>
-                            <span class="h-2 w-2 rounded-sm bg-leaf"></span>
-                        </div>
-                        <span>More</span>
-                    </div>
-
-                    <!-- Stat chips -->
-                    <div class="mt-2.5 grid grid-cols-3 gap-1.5">
-
-                        <div class="rounded-md bg-white/5 px-1 py-1 text-center">
-                            <p class="text-xs font-bold text-leaf">1,247</p>
-                            <p class="text-[10px] text-slate-500">Commits</p>
-                        </div>
-
-                        <div class="rounded-md bg-white/5 px-1 py-1 text-center">
-                            <p class="text-xs font-bold text-leaf">86</p>
-                            <p class="text-[10px] text-slate-500">Pull Req</p>
-                        </div>
-
-                        <div class="rounded-md bg-white/5 px-1 py-1 text-center">
-                            <p class="text-xs font-bold text-leaf">14</p>
-                            <p class="text-[10px] text-slate-500">wk Streak</p>
-                        </div>
-
-                    </div>
-
-                </div>
-
+<!-- SKILLS + TECH STACK -->
+            <section class="mt-3 grid gap-3 sm:grid-cols-2">
 
                 <!-- SKILLS -->
-                <div id="skills-content" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:700">
+                <div id="skills-content" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:640">
 
                     <span class="text-[10px] tracking-[0.2em] text-leaf">PROFICIENCY</span>
                     <h2 class="mt-1 text-sm font-semibold text-white">Skills</h2>
@@ -920,7 +949,7 @@
 
 
                 <!-- TECH STACK -->
-                <div id="stack-content" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:760">
+                <div id="stack-content" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:700">
 
                     <span class="text-[10px] tracking-[0.2em] text-leaf">TOOLS</span>
                     <h2 class="mt-1 text-sm font-semibold text-white">Tech Stack</h2>
@@ -940,6 +969,69 @@
                 </div>
 
             </section>
+
+<!-- GITHUB CONTRIBUTION HISTORY -->
+            <section class="mt-3">
+
+                <div id="github" class="load-item rounded-xl border border-white/10 bg-pine p-4" style="--d:760">
+
+                    <div class="flex flex-wrap items-start justify-between gap-2">
+
+                        <div>
+                            <span class="text-[10px] tracking-[0.2em] text-leaf">GITHUB</span>
+                            <h2 class="mt-1 text-sm font-semibold text-white">Contribution History</h2>
+                        </div>
+
+                        <a href="https://github.com/drream20" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-2.5 py-1 text-[11px] text-slate-400 transition hover:bg-leaf/10 hover:text-leaf">
+                            <svg class="hi h-3.5 w-3.5" aria-hidden="true"><use href="#hi-github"/></svg>
+                            <span class="font-medium">@drream20</span>
+                            <svg class="hi h-3 w-3 opacity-60 transition group-hover:translate-x-0.5" aria-hidden="true"><use href="#hi-arrow-right"/></svg>
+                        </a>
+
+                    </div>
+
+                    <p id="gh-total" class="mt-1.5 text-[11px] text-slate-500">Loading contribution data…</p>
+
+                    <!-- Stat chips -- filled from live data -->
+                    <div class="mt-2.5 grid grid-cols-3 gap-1.5">
+
+                        <div class="rounded-md bg-white/5 px-1 py-1 text-center">
+                            <p id="gh-stat-total" class="text-xs font-bold text-leaf">–</p>
+                            <p class="text-[10px] text-slate-500">Contributions</p>
+                        </div>
+
+                        <div class="rounded-md bg-white/5 px-1 py-1 text-center">
+                            <p id="gh-stat-active" class="text-xs font-bold text-leaf">–</p>
+                            <p class="text-[10px] text-slate-500">Active Days</p>
+                        </div>
+
+                        <div class="rounded-md bg-white/5 px-1 py-1 text-center">
+                            <p id="gh-stat-best" class="text-xs font-bold text-leaf">–</p>
+                            <p class="text-[10px] text-slate-500">Busiest Day</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Heatmap -- rendered by JS -->
+                    <div id="gh-heatmap" class="heatmap-scroll mt-3">
+                        <div class="gh-grid" id="gh-grid"></div>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="mt-1.5 flex items-center justify-end gap-1.5 text-[10px] text-slate-500">
+                        <span>Less</span>
+                        <span class="gh-cell gh-l0"></span>
+                        <span class="gh-cell gh-l1"></span>
+                        <span class="gh-cell gh-l2"></span>
+                        <span class="gh-cell gh-l3"></span>
+                        <span class="gh-cell gh-l4"></span>
+                        <span>More</span>
+                    </div>
+
+                </div>
+
+            </section>
+
 <!-- GALLERY -->
             <section class="mt-3">
 
@@ -1035,6 +1127,122 @@
         }
 
         applyTheme();
+
+        /* GitHub contribution heatmap -- live data for drream20, cached fallback */
+        (function () {
+            var USER = "drream20";
+            var API = "https://github-contributions-api.jogruber.de/v4/" + USER + "?y=last";
+            var CACHE_KEY = "gh-contrib-" + USER;
+            var PROFILE = "https://github.com/drream20";
+            var gridEl = document.getElementById("gh-grid");
+            var wrapEl = document.getElementById("gh-heatmap");
+            var totalEl = document.getElementById("gh-total");
+            if (!gridEl || !wrapEl) return;
+
+            function skeleton() {
+                var html = "";
+                for (var i = 0; i < 53 * 7; i++) html += '<span class="gh-cell gh-skel"></span>';
+                gridEl.innerHTML = html;
+            }
+
+            function fmtDate(iso) {
+                return new Date(iso + "T00:00:00").toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+            }
+
+            function stats(data) {
+                var days = data.contributions || [];
+                var total = (data.total && data.total.lastYear) || days.reduce(function (s, d) { return s + d.count; }, 0);
+                var active = days.filter(function (d) { return d.count > 0; }).length;
+                var best = 0;
+                days.forEach(function (d) { if (d.count > best) best = d.count; });
+                return { total: total, active: active, best: best };
+            }
+
+            function render(data) {
+                var days = data.contributions || [];
+                if (!days.length) { showError(); return; }
+
+                // Pad so the first column starts on Sunday, GitHub style
+                var firstDow = new Date(days[0].date + "T00:00:00").getDay();
+                var weeks = [], week = [];
+                for (var i = 0; i < firstDow; i++) week.push(null);
+                days.forEach(function (d) {
+                    week.push(d);
+                    if (week.length === 7) { weeks.push(week); week = []; }
+                });
+                if (week.length) { while (week.length < 7) week.push(null); weeks.push(week); }
+
+                // Month labels -- shown where a new month begins
+                var monthsHtml = "", lastMonth = -1;
+                weeks.forEach(function (wk, wi) {
+                    for (var ri = 0; ri < 7; ri++) {
+                        var d = wk[ri];
+                        if (!d) continue;
+                        var dt = new Date(d.date + "T00:00:00");
+                        if (dt.getMonth() !== lastMonth && dt.getDate() <= 7) {
+                            lastMonth = dt.getMonth();
+                            monthsHtml += '<span class="gh-month" style="left:' + (wi * 14) + 'px">' + dt.toLocaleDateString(undefined, { month: "short" }) + '</span>';
+                            break;
+                        }
+                    }
+                });
+
+                // Day cells
+                var cellsHtml = "";
+                weeks.forEach(function (wk) {
+                    wk.forEach(function (d) {
+                        if (!d) { cellsHtml += '<span class="gh-cell gh-empty"></span>'; return; }
+                        var lvl = Math.max(0, Math.min(4, d.level | 0));
+                        cellsHtml += '<span class="gh-cell gh-l' + lvl + '" title="' + d.count + (d.count === 1 ? ' contribution' : ' contributions') + ' on ' + fmtDate(d.date) + '"></span>';
+                    });
+                });
+
+                wrapEl.innerHTML =
+                    '<div class="flex gap-1.5">' +
+                        '<div class="gh-weekdays" aria-hidden="true"><span></span><span>Mon</span><span></span><span>Wed</span><span></span><span>Fri</span><span></span></div>' +
+                        '<div>' +
+                            '<div class="gh-months">' + monthsHtml + '</div>' +
+                            '<div class="gh-grid">' + cellsHtml + '</div>' +
+                        '</div>' +
+                    '</div>';
+
+                var s = stats(data);
+                document.getElementById("gh-stat-total").textContent = s.total.toLocaleString();
+                document.getElementById("gh-stat-active").textContent = s.active.toLocaleString();
+                document.getElementById("gh-stat-best").textContent = s.best.toLocaleString();
+                totalEl.textContent = s.total === 0
+                    ? "No public contributions in the last year yet."
+                    : s.total.toLocaleString() + " public contributions in the last year.";
+            }
+
+            function showError() {
+                wrapEl.innerHTML =
+                    '<div class="rounded-lg border border-white/10 bg-white/5 px-4 py-6 text-center">' +
+                        '<p class="text-xs text-slate-400">Contribution data is unavailable right now.</p>' +
+                        '<a href="' + PROFILE + '" target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-xs text-leaf hover:underline">View profile on GitHub →</a>' +
+                    '</div>';
+                totalEl.textContent = "Contribution data unavailable.";
+            }
+
+            function load() {
+                skeleton();
+                fetch(API)
+                    .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+                    .then(function (data) {
+                        try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: data })); } catch (e) { /* storage unavailable */ }
+                        render(data);
+                    })
+                    .catch(function () {
+                        try {
+                            var cached = JSON.parse(localStorage.getItem(CACHE_KEY) || "null");
+                            if (cached && cached.data) { render(cached.data); return; }
+                        } catch (e) { /* fall through to error */ }
+                        showError();
+                    });
+            }
+
+            load();
+        })();
 
         /* Recent Activity -- reveal items once as they scroll into view */
         (function () {

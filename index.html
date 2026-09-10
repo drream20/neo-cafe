@@ -261,6 +261,54 @@
         }
       }
 
+      /* ===== Gallery -- horizontally scrollable image row ===== */
+      .gallery-scroll {
+        display: flex;
+        gap: 8px; /* gap-2 */
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        overscroll-behavior-x: contain;
+        padding-bottom: 6px;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+        scrollbar-color: rgb(var(--leaf) / 0.35) transparent;
+      }
+
+      .gallery-scroll > * {
+        flex: 0 0 auto;
+        width: 150px;
+        scroll-snap-align: start;
+      }
+
+      @media (min-width: 640px) {
+        .gallery-scroll > * {
+          width: 170px;
+        }
+      }
+
+      .gallery-scroll::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+
+      .gallery-scroll::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .gallery-scroll::-webkit-scrollbar-thumb {
+        background: rgb(var(--leaf) / 0.35);
+        border-radius: 999px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .gallery-scroll {
+          scroll-snap-type: none;
+        }
+      }
+
       /* Items fade in once as they enter the viewport / scroll area */
       html.js .activity-item {
         opacity: 0;
@@ -868,7 +916,7 @@
           <!-- Social icons -->
           <div class="mt-2.5 flex justify-between text-slate-400">
             <a
-              href="#"
+              href="https://www.facebook.com/edmarlindo"
               class="flex-1 flex items-center justify-center hover:text-leaf transition"
               title="Facebook"
             >
@@ -878,7 +926,7 @@
             </a>
 
             <a
-              href="#"
+              href="https://www.instagram.com/edmarlindo"
               class="flex-1 flex items-center justify-center hover:text-leaf transition"
               title="Instagram"
             >
@@ -888,7 +936,7 @@
             </a>
 
             <a
-              href="#"
+              href="https://www.github.com/drream20"
               class="flex-1 flex items-center justify-center hover:text-leaf transition"
               title="GitHub"
             >
@@ -1164,7 +1212,7 @@
               </h3>
 
               <a
-                href="#"
+                href="./projects/1.html"
                 class="inline-flex items-center gap-1 text-xs text-leaf"
               >
                 View All
@@ -1627,27 +1675,67 @@
           >
             <h2 class="text-sm font-semibold text-white">Gallery</h2>
 
-            <div class="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
-              <img
-                src="assets/gallery/new5.jpg"
-                class="aspect-square rounded-lg object-cover"
-                alt="Gallery"
-              />
-              <img
-                src="assets/gallery/new6.jpg"
-                class="aspect-square rounded-lg object-cover"
-                alt="Gallery"
-              />
-              <img
-                src="assets/gallery/new7.jpg"
-                class="aspect-square rounded-lg object-cover"
-                alt="Gallery"
-              />
-              <img
-                src="assets/gallery/new8.jpg"
-                class="aspect-square rounded-lg object-cover"
-                alt="Gallery"
-              />
+            <div class="gallery-scroll mt-2">
+              <figure class="group relative overflow-hidden rounded-lg">
+                <img
+                  src="assets/gallery/new5.jpg"
+                  class="aspect-square w-full object-cover"
+                  alt="Gallery"
+                />
+                <div class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/70 to-black/30 opacity-0 transition duration-300 group-hover:opacity-100">
+                  <span class="absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">internship</span>
+                </div>
+              </figure>
+              <figure class="group relative overflow-hidden rounded-lg">
+                <img
+                  src="assets/gallery/new6.jpg"
+                  class="aspect-square w-full object-cover"
+                  alt="Gallery"
+                />
+                <div class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/70 to-black/30 opacity-0 transition duration-300 group-hover:opacity-100">
+                  <span class="absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">internship</span>
+                </div>
+              </figure>
+              <figure class="group relative overflow-hidden rounded-lg">
+                <img
+                  src="assets/gallery/new7.jpg"
+                  class="aspect-square w-full object-cover"
+                  alt="Gallery"
+                />
+                <div class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/70 to-black/30 opacity-0 transition duration-300 group-hover:opacity-100">
+                  <span class="absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">internship</span>
+                </div>
+              </figure>
+              <figure class="group relative overflow-hidden rounded-lg">
+                <img
+                  src="assets/gallery/new8.jpg"
+                  class="aspect-square w-full object-cover"
+                  alt="Gallery"
+                />
+                <div class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/70 to-black/30 opacity-0 transition duration-300 group-hover:opacity-100">
+                  <span class="absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">internship</span>
+                </div>
+              </figure>
+              <figure class="group relative overflow-hidden rounded-lg">
+                <img
+                  src="assets/gallery/new9.jpg"
+                  class="aspect-square w-full object-cover"
+                  alt="Gallery"
+                />
+                <div class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/70 to-black/30 opacity-0 transition duration-300 group-hover:opacity-100">
+                  <span class="absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">internship</span>
+                </div>
+              </figure>
+              <figure class="group relative overflow-hidden rounded-lg">
+                <img
+                  src="assets/gallery/new10.jpg"
+                  class="aspect-square w-full object-cover"
+                  alt="Gallery"
+                />
+                <div class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/70 to-black/30 opacity-0 transition duration-300 group-hover:opacity-100">
+                  <span class="absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">internship</span>
+                </div>
+              </figure>
             </div>
           </div>
         </section>

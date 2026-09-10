@@ -468,6 +468,20 @@
         );
       }
 
+      /* Tablet (iPad / Surface Pro 7) -- pull the profile image slightly toward
+         the center; the right side stays dominant. 768-1023.98px covers iPad
+         (768-834 portrait) and Surface Pro 7 (912 portrait); below stays on the
+         mobile -right-[150px] bleed, at lg+ the lg:right-0 utility applies. */
+      @media (min-width: 768px) and (max-width: 1023.98px) {
+        #home .hero-profile-glow {
+          right: 3%;
+        }
+        .stat-card{
+          right: 3%;
+        }
+
+      }
+
       .sidebar-link.active {
         background: linear-gradient(
           90deg,

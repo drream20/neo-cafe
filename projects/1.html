@@ -309,6 +309,126 @@
         }
       }
 
+      /* ===== Interactive tilt cards (Featured Projects) =====
+         Cards follow the pointer in 3D (rotateX / rotateY) with a soft leaf
+         glare underneath. JS feeds --rx / --ry / --gx / --gy; touch screens
+         and reduced-motion users get a plain static card. */
+      .tilt-card {
+        position: relative;
+        transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+        will-change: transform;
+      }
+
+      .tilt-card.tilt-live {
+        transition: transform 0.12s ease-out;
+      }
+
+      .tilt-card.tilt-settle {
+        transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .tilt-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(
+          circle at var(--gx, 50%) var(--gy, 50%),
+          rgb(var(--leaf) / 0.14),
+          transparent 65%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+        pointer-events: none;
+      }
+
+      .tilt-card.tilt-active::after,
+      .tilt-card:focus-within::after {
+        opacity: 1;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .tilt-card {
+          transform: none;
+          transition: none;
+        }
+
+        .tilt-card::after {
+          opacity: 0;
+          transition: none;
+        }
+      }
+
+      /* ===== Gallery -- slow cinematic zoom + caption that slides up ===== */
+      .gallery-scroll img {
+        will-change: transform;
+        transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .gallery-scroll figure:hover img,
+      .gallery-scroll figure:focus-within img {
+        transform: scale(1.07);
+      }
+
+      .gallery-cap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 25%;
+        background: linear-gradient(
+          to top,
+          rgb(0 0 0 / 0.7),
+          rgb(0 0 0 / 0.3)
+        );
+        opacity: 0;
+        transform: translateY(100%);
+        transition:
+          opacity 220ms ease-out,
+          transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+        pointer-events: none;
+      }
+
+      .gallery-scroll figure:hover .gallery-cap,
+      .gallery-scroll figure:focus-within .gallery-cap {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .gallery-label {
+        opacity: 0;
+        transform: translateY(4px);
+        transition:
+          opacity 200ms ease-out,
+          transform 200ms ease-out;
+        transition-delay: 140ms;
+      }
+
+      .gallery-scroll figure:hover .gallery-label,
+      .gallery-scroll figure:focus-within .gallery-label {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .gallery-scroll img {
+          transform: none;
+          transition: none;
+        }
+
+        .gallery-cap {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+
+        .gallery-label {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+
       /* Items fade in once as they enter the viewport / scroll area */
       html.js .activity-item {
         opacity: 0;
@@ -994,7 +1114,7 @@
             <div class="mt-3 grid gap-3 sm:grid-cols-2">
               <!-- Project 1 -->
               <article
-                class="group overflow-hidden rounded-lg border border-black/10 bg-ink transition hover:border-leaf/40 hover:-translate-y-0.5"
+                class="tilt-card group overflow-hidden rounded-lg border border-black/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
@@ -1031,7 +1151,7 @@
 
               <!-- Project 2 -->
               <article
-                class="group overflow-hidden rounded-lg border border-black/10 bg-ink transition hover:border-leaf/40 hover:-translate-y-0.5"
+                class="tilt-card group overflow-hidden rounded-lg border border-black/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
@@ -1067,7 +1187,7 @@
               </article>
 <!-- Project 3 -->
               <article
-                class="group overflow-hidden rounded-lg border border-black/10 bg-ink transition hover:border-leaf/40 hover:-translate-y-0.5"
+                class="tilt-card group overflow-hidden rounded-lg border border-black/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
@@ -1102,7 +1222,7 @@
 
               <!-- Project 4 -->
               <article
-                class="group overflow-hidden rounded-lg border border-black/10 bg-ink transition hover:border-leaf/40 hover:-translate-y-0.5"
+                class="tilt-card group overflow-hidden rounded-lg border border-black/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
@@ -1135,7 +1255,7 @@
 
               <!-- Project 5 -->
               <article
-                class="group overflow-hidden rounded-lg border border-black/10 bg-ink transition hover:border-leaf/40 hover:-translate-y-0.5"
+                class="tilt-card group overflow-hidden rounded-lg border border-black/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
@@ -1241,6 +1361,68 @@
       }
 
       applyTheme();
+
+      /* Interactive tilt for Featured Project cards --
+         fine & precise pointers only; touch devices and reduced-motion users
+         get a plain card (the CSS also guards reduced-motion). */
+      (function () {
+        var cards = document.querySelectorAll(".tilt-card");
+        if (!cards.length) return;
+
+        var fine;
+        var rm;
+        try {
+          fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+        } catch (e) {
+          fine = false;
+        }
+        try {
+          rm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        } catch (e) {
+          rm = false;
+        }
+        if (!fine || rm) return;
+
+        var MAX_X = 8; /* rotateX degrees -- vertical movement */
+        var MAX_Y = 10; /* rotateY degrees -- horizontal movement */
+
+        cards.forEach(function (card) {
+          card.addEventListener(
+            "pointerenter",
+            function () {
+              card.classList.add("tilt-active", "tilt-live");
+              card.classList.remove("tilt-settle");
+            },
+            { passive: true },
+          );
+
+          card.addEventListener(
+            "pointermove",
+            function (e) {
+              var r = card.getBoundingClientRect();
+              var px = (e.clientX - r.left) / r.width;
+              var py = (e.clientY - r.top) / r.height;
+
+              card.style.setProperty("--rx", MAX_X * (0.5 - py) + "deg");
+              card.style.setProperty("--ry", MAX_Y * (px - 0.5) + "deg");
+              card.style.setProperty("--gx", px * 100 + "%");
+              card.style.setProperty("--gy", py * 100 + "%");
+            },
+            { passive: true },
+          );
+
+          card.addEventListener(
+            "pointerleave",
+            function () {
+              card.classList.remove("tilt-active", "tilt-live");
+              card.classList.add("tilt-settle");
+              card.style.setProperty("--rx", "0deg");
+              card.style.setProperty("--ry", "0deg");
+            },
+            { passive: true },
+          );
+        });
+      })();
 
       /* GitHub contribution heatmap -- live data for drream20, cached fallback */
       (function () {

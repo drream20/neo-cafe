@@ -1,0 +1,7 @@
+/* Build source for the compiled stylesheet.
+   Regenerate with:  npx tailwindcss -i css/input.css -o tailwind.css --minify
+   The custom styles (scrollbars, tilt cards, gallery, heatmap, entrance
+   animations) live inline in the HTML files and are not part of this build. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

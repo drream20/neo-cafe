@@ -633,7 +633,7 @@
         opacity: 0.35;
       }
       html.light [class~="hover:bg-leaf"]:hover {
-        background: rgb(37, 211, 43);
+        background: rgb(var(--leaf) / 0.12);
       }
 
       /* Heroicons sprite: minimalist clean stroke icons */
@@ -672,6 +672,11 @@
         transform: translateY(0);
       }
 
+      .gallery-scroll figure:focus-visible {
+        outline: 2px solid rgb(var(--leaf));
+        outline-offset: 2px;
+      }
+
       /* Reduced motion -- stop the infinite stats-card float */
       @media (prefers-reduced-motion: reduce) {
         #stats-card,
@@ -682,6 +687,20 @@
       }
 
     </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Edmar Lindo",
+        "jobTitle": "Web Developer & Designer",
+        "url": "https://neocafe-pi.vercel.app/",
+        "sameAs": [
+          "https://www.facebook.com/edmarlindo",
+          "https://www.instagram.com/edmarlindo",
+          "https://www.github.com/drream20"
+        ]
+      }
+    </script>
   </head>
 
   <body class="text-slate-200 font-sans">
@@ -966,7 +985,7 @@
             />
           </div>
           <div>
-            <h1 class="text-base font-semibold text-white">Edmar Lindo</h1>
+            <p class="text-base font-semibold text-white">Edmar Lindo</p>
 
             <p class="mt-0.5 text-[10px] text-slate-400">
               Web Developer & Designer
@@ -1047,9 +1066,9 @@
             LET'S WORK TOGETHER
           </p>
 
-          <h2 class="mt-1 text-sm font-semibold text-white">
+          <p class="mt-1 text-sm font-semibold text-white">
             Have a project in mind?
-          </h2>
+          </p>
 
           <p class="mt-1 text-[10px] leading-4 text-slate-400">
             Open to new opportunities and collaborations.
@@ -1094,7 +1113,7 @@
           <!-- Social icons -->
           <div class="mt-2.5 flex justify-between text-slate-400">
             <a
-              href="https://www.facebook.com/edmarlindo"
+              href="https://www.facebook.com/edmarlindo" target="_blank" rel="noopener noreferrer"
               class="flex-1 flex items-center justify-center hover:text-leaf transition"
               title="Facebook"
             >
@@ -1104,7 +1123,7 @@
             </a>
 
             <a
-              href="https://www.instagram.com/edmarlindo"
+              href="https://www.instagram.com/edmarlindo" target="_blank" rel="noopener noreferrer"
               class="flex-1 flex items-center justify-center hover:text-leaf transition"
               title="Instagram"
             >
@@ -1114,7 +1133,7 @@
             </a>
 
             <a
-              href="https://www.github.com/drream20"
+              href="https://www.github.com/drream20" target="_blank" rel="noopener noreferrer"
               class="flex-1 flex items-center justify-center hover:text-leaf transition"
               title="GitHub"
             >
@@ -1125,7 +1144,7 @@
 
             <!-- TODO: replace with your real LinkedIn profile URL -->
             <a
-              href="https://www.linkedin.com/"
+              href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"
               class="flex-1 flex items-center justify-center hover:text-leaf transition"
               title="LinkedIn"
             >
@@ -1158,7 +1177,7 @@
             style="--d: 380"
           >
             <div class="flex items-center justify-between">
-              <h3 class="text-base font-semibold text-white">My Projects</h3>
+              <h1 class="text-base font-semibold text-white">My Projects</h1>
               <a
                 href="../index.html"
                 class="inline-flex items-center gap-1 text-xs text-leaf"

@@ -22,7 +22,7 @@
     />
     <meta
       property="og:image"
-      content="https://neocafe-pi.vercel.app/assets/profile.png"
+      content="https://neocafe-pi.vercel.app/assets/profile.webp"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Edmar Lindo | Web Developer & Designer" />
@@ -32,7 +32,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://neocafe-pi.vercel.app/assets/profile.png"
+      content="https://neocafe-pi.vercel.app/assets/profile.webp"
     />
 
     <script>
@@ -689,10 +689,48 @@
         vertical-align: -0.125em;
         flex-shrink: 0;
       }
+
+      /* ===== Accessibility hardening ===== */
+      /* Keyboard focus ring */
+      a:focus-visible,
+      button:focus-visible,
+      [tabindex]:focus-visible {
+        outline: 2px solid rgb(var(--leaf));
+        outline-offset: 2px;
+      }
+
+      /* Skip link -- hidden until focused */
+      .skip-link {
+        position: absolute;
+        left: 12px;
+        top: 12px;
+        transform: translateY(-150%);
+        background: rgb(var(--ink));
+        color: rgb(var(--leaf));
+        padding: 9px 16px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        z-index: 999;
+      }
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      /* Reduced motion -- stop the infinite stats-card float */
+      @media (prefers-reduced-motion: reduce) {
+        #stats-card,
+        .stats {
+          animation: none;
+          will-change: auto;
+        }
+      }
+
     </style>
   </head>
 
   <body class="text-slate-200 font-sans">
+    <a href="#main" class="skip-link">Skip to content</a>
     <!-- HEROICONS SPRITE (minimalist clean stroke icons) -->
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -965,11 +1003,11 @@
           >
             <img
               id="sidebarLogo"
-              src="sidebar-logo/dark.png"
+              src="sidebar-logo/dark.webp"
               alt="DreamLodin logo"
               class="h-full w-full object-cover"
-              data-dark="sidebar-logo/dark.png"
-              data-light="sidebar-logo/light.png"
+              data-dark="sidebar-logo/dark.webp"
+              data-light="sidebar-logo/light.webp"
             />
           </div>
           <div>
@@ -1008,7 +1046,7 @@
         </a>
 
         <a
-          href="./projects/1.html"
+          href="./projects/projects.html"
           class="sidebar-link flex items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium transition"
         >
           <!-- Projects -->
@@ -1138,7 +1176,7 @@
     <!-- MOBILE BUTTON -->
     <button
       onclick="openSidebar()"
-      aria-label="Open navigation menu"
+      aria-label="Open navigation menu" aria-expanded="false" aria-controls="sidebar"
       class="fixed right-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-pine text-slate-200 lg:hidden"
     >
       <svg class="hi h-5 w-5" aria-hidden="true">
@@ -1146,7 +1184,7 @@
       </svg>
     </button>
 
-    <main class="min-h-screen lg:ml-[232px]">
+    <main id="main" class="min-h-screen lg:ml-[232px]">
       <div class="mx-auto max-w-[1600px] px-4 py-3 lg:px-6 lg:py-4">
         <!-- HERO -->
         <section
@@ -1168,7 +1206,7 @@
             class="hero-profile-glow pointer-events-none absolute -right-[150px] top-3/4 -translate-y-1/2 rounded-3xl p-2 lg:right-0"
           >
             <img
-              src="assets/profile.png"
+              src="assets/profile.webp"
               alt=""
               class="max-h-104 object-contain"
               onerror="this.style.display = 'none'"
@@ -1392,7 +1430,7 @@
               </h3>
 
               <a
-                href="./projects/1.html"
+                href="./projects/projects.html"
                 class="inline-flex items-center gap-1 text-xs text-leaf"
               >
                 View All
@@ -1406,12 +1444,12 @@
             <div class="projects-scroll mt-3">
               <!-- Project 1 -->
               <a
-                href="./projects/1.html#project-1"
+                href="./projects/projects.html#project-1"
                 class="tilt-card group block cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
-                    src="assets/empire.png"
+                    src="assets/empire.webp"
                     alt="School Voting System"
                     width="640"
                     height="360"
@@ -1444,12 +1482,12 @@
 
               <!-- Project 2 -->
               <a
-                href="./projects/1.html#project-2"
+                href="./projects/projects.html#project-2"
                 class="tilt-card group block cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
-                    src="assets/portfolio-website.png"
+                    src="assets/portfolio-website.webp"
                     alt="Portfolio Website"
                     width="640"
                     height="360"
@@ -1482,12 +1520,12 @@
 
               <!-- Project 3 -->
               <a
-                href="./projects/1.html#project-3"
+                href="./projects/projects.html#project-3"
                 class="tilt-card group block cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
-                    src="assets/cafe.png"
+                    src="assets/cafe.webp"
                     alt="Notes App"
                     width="640"
                     height="360"
@@ -1518,12 +1556,12 @@
 
               <!-- Project 4 -->
               <a
-                href="./projects/1.html#project-4"
+                href="./projects/projects.html#project-4"
                 class="tilt-card group block cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
-                    src="assets/neo-cafe-app.png"
+                    src="assets/neo-cafe-app.webp"
                     alt="Neo Cafe App"
                     width="640"
                     height="360"
@@ -1550,12 +1588,12 @@
 
               <!-- Project 5 -->
               <a
-                href="./projects/1.html#project-5"
+                href="./projects/projects.html#project-5"
                 class="tilt-card group block cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
-                    src="assets/prof.png"
+                    src="assets/prof.webp"
                     alt="Cafe Management Dashboard"
                     width="640"
                     height="360"
@@ -1608,7 +1646,7 @@
                   <h4 class="text-xs font-medium leading-5 text-white">
                     Updated portfolio design
                   </h4>
-                  <p class="text-[10px] text-slate-500">Sep 08, 2026</p>
+                  <p class="text-[10px] text-slate-400">Sep 08, 2026</p>
                 </div>
                 <div class="activity-item relative">
                   <span
@@ -1617,7 +1655,7 @@
                   <h4 class="text-xs font-medium leading-5 text-white">
                     Completed School Voting System
                   </h4>
-                  <p class="text-[10px] text-slate-500">Aug 10, 2026</p>
+                  <p class="text-[10px] text-slate-400">Aug 10, 2026</p>
                 </div>
                 <div class="activity-item relative">
                   <span
@@ -1626,7 +1664,7 @@
                   <h4 class="text-xs font-medium leading-5 text-white">
                     Learned Flutter basics
                   </h4>
-                  <p class="text-[10px] text-slate-500">Jul 28, 2026</p>
+                  <p class="text-[10px] text-slate-400">Jul 28, 2026</p>
                 </div>
                 <div class="activity-item relative">
                   <span
@@ -1635,7 +1673,7 @@
                   <h4 class="text-xs font-medium leading-5 text-white">
                     Started new project
                   </h4>
-                  <p class="text-[10px] text-slate-500">Jul 15, 2026</p>
+                  <p class="text-[10px] text-slate-400">Jul 15, 2026</p>
                 </div>
                 <div class="activity-item relative">
                   <span
@@ -1644,7 +1682,7 @@
                   <h4 class="text-xs font-medium leading-5 text-white">
                     Attended web development webinar
                   </h4>
-                  <p class="text-[10px] text-slate-500">Jul 02, 2026</p>
+                  <p class="text-[10px] text-slate-400">Jul 02, 2026</p>
                 </div>
                 <div class="activity-item relative">
                   <span
@@ -1653,7 +1691,7 @@
                   <h4 class="text-xs font-medium leading-5 text-white">
                     Redesigned project database schema
                   </h4>
-                  <p class="text-[10px] text-slate-500">Jun 20, 2026</p>
+                  <p class="text-[10px] text-slate-400">Jun 20, 2026</p>
                 </div>
                 <div class="activity-item relative">
                   <span
@@ -1662,7 +1700,7 @@
                   <h4 class="text-xs font-medium leading-5 text-white">
                     Deployed first Laravel project
                   </h4>
-                  <p class="text-[10px] text-slate-500">Jun 05, 2026</p>
+                  <p class="text-[10px] text-slate-400">Jun 05, 2026</p>
                 </div>
                 <div class="activity-item relative">
                   <span
@@ -1671,7 +1709,7 @@
                   <h4 class="text-xs font-medium leading-5 text-white">
                     Joined coding bootcamp
                   </h4>
-                  <p class="text-[10px] text-slate-500">May 18, 2026</p>
+                  <p class="text-[10px] text-slate-400">May 18, 2026</p>
                 </div>
                 <div class="activity-item relative">
                   <span
@@ -1680,7 +1718,7 @@
                   <h4 class="text-xs font-medium leading-5 text-white">
                     Built first REST API
                   </h4>
-                  <p class="text-[10px] text-slate-500">May 02, 2026</p>
+                  <p class="text-[10px] text-slate-400">May 02, 2026</p>
                 </div>
                 <div class="activity-item relative">
                   <span
@@ -1689,7 +1727,7 @@
                   <h4 class="text-xs font-medium leading-5 text-white">
                     Began learning JavaScript
                   </h4>
-                  <p class="text-[10px] text-slate-500">Apr 15, 2026</p>
+                  <p class="text-[10px] text-slate-400">Apr 15, 2026</p>
                 </div>
               </div>
             </div>
@@ -1829,7 +1867,7 @@
               </a>
             </div>
 
-            <p id="gh-total" class="mt-1.5 text-[11px] text-slate-500">
+            <p id="gh-total" class="mt-1.5 text-[11px] text-slate-400">
               Loading contribution data…
             </p>
 
@@ -1837,17 +1875,17 @@
             <div class="mt-2.5 grid grid-cols-3 gap-1.5">
               <div class="rounded-md bg-white/5 px-1 py-1 text-center">
                 <p id="gh-stat-total" class="text-xs font-bold text-leaf">–</p>
-                <p class="text-[10px] text-slate-500">Contributions</p>
+                <p class="text-[10px] text-slate-400">Contributions</p>
               </div>
 
               <div class="rounded-md bg-white/5 px-1 py-1 text-center">
                 <p id="gh-stat-active" class="text-xs font-bold text-leaf">–</p>
-                <p class="text-[10px] text-slate-500">Active Days</p>
+                <p class="text-[10px] text-slate-400">Active Days</p>
               </div>
 
               <div class="rounded-md bg-white/5 px-1 py-1 text-center">
                 <p id="gh-stat-best" class="text-xs font-bold text-leaf">–</p>
-                <p class="text-[10px] text-slate-500">Busiest Day</p>
+                <p class="text-[10px] text-slate-400">Busiest Day</p>
               </div>
             </div>
 
@@ -1858,7 +1896,7 @@
 
             <!-- Legend -->
             <div
-              class="mt-1.5 flex items-center justify-end gap-1.5 text-[10px] text-slate-500"
+              class="mt-1.5 flex items-center justify-end gap-1.5 text-[10px] text-slate-400"
             >
               <span>Less</span>
               <span class="gh-cell gh-l0"></span>
@@ -1880,11 +1918,12 @@
           >
             <h2 class="text-sm font-semibold text-white">Gallery</h2>
 
+            <!-- TODO: personalize the alt text and labels below to match what each photo actually shows -->
             <div class="gallery-scroll mt-2">
               <figure class="group relative overflow-hidden rounded-lg">
                 <img
-                  src="assets/gallery/new5.jpg"
-                  alt="Photo from my web development internship"
+                  src="assets/gallery/new5.webp"
+                  alt="My workstation during the web development internship"
                   width="400"
                   height="400"
                   loading="lazy"
@@ -1892,13 +1931,13 @@
                   class="aspect-square w-full object-cover"
                 />
                 <div class="gallery-cap">
-                  <span class="gallery-label absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">internship</span>
+                  <span class="gallery-label absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">workstation</span>
                 </div>
               </figure>
               <figure class="group relative overflow-hidden rounded-lg">
                 <img
-                  src="assets/gallery/new6.jpg"
-                  alt="Photo from my web development internship"
+                  src="assets/gallery/new6.webp"
+                  alt="Collaborating with teammates during my web development internship"
                   width="400"
                   height="400"
                   loading="lazy"
@@ -1906,13 +1945,13 @@
                   class="aspect-square w-full object-cover"
                 />
                 <div class="gallery-cap">
-                  <span class="gallery-label absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">internship</span>
+                  <span class="gallery-label absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">collaboration</span>
                 </div>
               </figure>
               <figure class="group relative overflow-hidden rounded-lg">
                 <img
-                  src="assets/gallery/new7.jpg"
-                  alt="Photo from my web development internship"
+                  src="assets/gallery/new7.webp"
+                  alt="Reviewing code with colleagues during my internship"
                   width="400"
                   height="400"
                   loading="lazy"
@@ -1920,13 +1959,13 @@
                   class="aspect-square w-full object-cover"
                 />
                 <div class="gallery-cap">
-                  <span class="gallery-label absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">internship</span>
+                  <span class="gallery-label absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">code review</span>
                 </div>
               </figure>
               <figure class="group relative overflow-hidden rounded-lg">
                 <img
-                  src="assets/gallery/new8.jpg"
-                  alt="Photo from my web development internship"
+                  src="assets/gallery/new8.webp"
+                  alt="Team meeting during my web development internship"
                   width="400"
                   height="400"
                   loading="lazy"
@@ -1934,13 +1973,13 @@
                   class="aspect-square w-full object-cover"
                 />
                 <div class="gallery-cap">
-                  <span class="gallery-label absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">internship</span>
+                  <span class="gallery-label absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">team</span>
                 </div>
               </figure>
               <figure class="group relative overflow-hidden rounded-lg">
                 <img
-                  src="assets/gallery/new9.jpg"
-                  alt="Photo from my web development internship"
+                  src="assets/gallery/new9.webp"
+                  alt="Presenting my work at the internship"
                   width="400"
                   height="400"
                   loading="lazy"
@@ -1948,13 +1987,13 @@
                   class="aspect-square w-full object-cover"
                 />
                 <div class="gallery-cap">
-                  <span class="gallery-label absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">internship</span>
+                  <span class="gallery-label absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">demo</span>
                 </div>
               </figure>
               <figure class="group relative overflow-hidden rounded-lg">
                 <img
-                  src="assets/gallery/new10.jpg"
-                  alt="Photo from my web development internship"
+                  src="assets/gallery/new10.webp"
+                  alt="Around the office during my web development internship"
                   width="400"
                   height="400"
                   loading="lazy"
@@ -1962,7 +2001,7 @@
                   class="aspect-square w-full object-cover"
                 />
                 <div class="gallery-cap">
-                  <span class="gallery-label absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">internship</span>
+                  <span class="gallery-label absolute right-1.5 bottom-1 text-[10px] font-semibold text-slate-100">office</span>
                 </div>
               </figure>
             </div>
@@ -1971,7 +2010,7 @@
 
         <!-- FOOTER -->
         <footer
-          class="load-item py-3 text-center text-xs text-slate-600"
+          class="load-item py-3 text-center text-xs text-slate-400"
           style="--d: 820"
         >
           © 2026 Edmar Lindo. All rights reserved.
@@ -1987,12 +2026,14 @@
         sidebar.classList.remove("-translate-x-full");
 
         overlay.classList.remove("hidden");
+        sidebar.setAttribute("aria-expanded", "true");
       }
 
       function closeSidebar() {
         sidebar.classList.add("-translate-x-full");
 
         overlay.classList.add("hidden");
+        sidebar.setAttribute("aria-expanded", "false");
       }
 
       /* Close mobile sidebar after clicking a link */

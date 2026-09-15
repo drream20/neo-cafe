@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://neocafe-pi.vercel.app/sitemap.xml
+

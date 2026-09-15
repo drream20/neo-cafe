@@ -14,7 +14,7 @@
 
     <!-- Open Graph / Twitter — shown whenever the site is shared on social media -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://neocafe-pi.vercel.app/projects/1.html" />
+    <meta property="og:url" content="https://neocafe-pi.vercel.app/projects/projects.html" />
     <meta property="og:title" content="Edmar Lindo | Projects" />
     <meta
       property="og:description"
@@ -22,7 +22,7 @@
     />
     <meta
       property="og:image"
-      content="https://neocafe-pi.vercel.app/assets/profile.png"
+      content="https://neocafe-pi.vercel.app/assets/profile.webp"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Edmar Lindo | Projects" />
@@ -32,7 +32,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://neocafe-pi.vercel.app/assets/profile.png"
+      content="https://neocafe-pi.vercel.app/assets/profile.webp"
     />
 
     <script>
@@ -644,10 +644,48 @@
         vertical-align: -0.125em;
         flex-shrink: 0;
       }
+
+      /* ===== Accessibility hardening ===== */
+      /* Keyboard focus ring */
+      a:focus-visible,
+      button:focus-visible,
+      [tabindex]:focus-visible {
+        outline: 2px solid rgb(var(--leaf));
+        outline-offset: 2px;
+      }
+
+      /* Skip link -- hidden until focused */
+      .skip-link {
+        position: absolute;
+        left: 12px;
+        top: 12px;
+        transform: translateY(-150%);
+        background: rgb(var(--ink));
+        color: rgb(var(--leaf));
+        padding: 9px 16px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        z-index: 999;
+      }
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      /* Reduced motion -- stop the infinite stats-card float */
+      @media (prefers-reduced-motion: reduce) {
+        #stats-card,
+        .stats {
+          animation: none;
+          will-change: auto;
+        }
+      }
+
     </style>
   </head>
 
   <body class="text-slate-200 font-sans">
+    <a href="#main" class="skip-link">Skip to content</a>
     <!-- HEROICONS SPRITE (minimalist clean stroke icons) -->
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -920,11 +958,11 @@
           >
             <img
               id="sidebarLogo"
-              src="../sidebar-logo/dark.png"
+              src="../sidebar-logo/dark.webp"
               alt="DreamLodin logo"
               class="h-full w-full object-cover"
-              data-dark="../sidebar-logo/dark.png"
-              data-light="../sidebar-logo/light.png"
+              data-dark="../sidebar-logo/dark.webp"
+              data-light="../sidebar-logo/light.webp"
             />
           </div>
           <div>
@@ -964,7 +1002,7 @@
         </a>
 
         <a
-          href="./projects/1.html"
+          href="../projects/projects.html#main"
           class="sidebar-link active flex items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium transition"
         >
           <!-- Projects -->
@@ -1103,7 +1141,7 @@
     <!-- MOBILE BUTTON -->
     <button
       onclick="openSidebar()"
-      aria-label="Open navigation menu"
+      aria-label="Open navigation menu" aria-expanded="false" aria-controls="sidebar"
       class="fixed right-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-pine text-slate-200 lg:hidden"
     >
       <svg class="hi h-5 w-5" aria-hidden="true">
@@ -1111,7 +1149,7 @@
       </svg>
     </button>
 
-    <main class="min-h-screen lg:ml-[232px]">
+    <main id="main" class="min-h-screen lg:ml-[232px]">
       <div class="mx-auto max-w-[1600px] px-4 py-3 lg:px-6 lg:py-4">
  
          <section class="mt-3">
@@ -1141,7 +1179,7 @@
               >
                 <div class="aspect-video bg-pine">
                   <img
-                    src="../assets/empire.png"
+                    src="../assets/empire.webp"
                     alt="School Voting System"
                     width="640"
                     height="360"
@@ -1183,7 +1221,7 @@
               >
                 <div class="aspect-video bg-pine">
                   <img
-                    src="../assets/portfolio-website.png"
+                    src="../assets/portfolio-website.webp"
                     alt="Portfolio Website"
                     width="640"
                     height="360"
@@ -1224,7 +1262,7 @@
               >
                 <div class="aspect-video bg-pine">
                   <img
-                    src="../assets/cafe.png"
+                    src="../assets/cafe.webp"
                     alt="Notes App"
                     width="640"
                     height="360"
@@ -1264,7 +1302,7 @@
               >
                 <div class="aspect-video bg-pine">
                   <img
-                    src="../assets/neo-cafe-app.png"
+                    src="../assets/neo-cafe-app.webp"
                     alt="Neo Cafe App"
                     width="640"
                     height="360"
@@ -1302,7 +1340,7 @@
               >
                 <div class="aspect-video bg-pine">
                   <img
-                    src="../assets/prof.png"
+                    src="../assets/prof.webp"
                     alt="Cafe Management Dashboard"
                     width="640"
                     height="360"
@@ -1343,7 +1381,7 @@
     
         <!-- FOOTER -->
         <footer
-          class="load-item py-3 text-center text-xs text-slate-600"
+          class="load-item py-3 text-center text-xs text-slate-400"
           style="--d: 820"
         >
           © 2026 Edmar Lindo. All rights reserved.
@@ -1359,12 +1397,14 @@
         sidebar.classList.remove("-translate-x-full");
 
         overlay.classList.remove("hidden");
+        sidebar.setAttribute("aria-expanded", "true");
       }
 
       function closeSidebar() {
         sidebar.classList.add("-translate-x-full");
 
         overlay.classList.add("hidden");
+        sidebar.setAttribute("aria-expanded", "false");
       }
 
       /* Close mobile sidebar after clicking a link */
@@ -1708,3 +1748,4 @@
     </script>
   </body>
 </html>
+

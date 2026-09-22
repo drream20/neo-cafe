@@ -1887,9 +1887,7 @@
             class="load-item rounded-xl border border-white/10 bg-pine p-4"
             style="--d: 640"
           >
-            <span class="text-[10px] tracking-[0.2em] text-leaf"
-              >PROFICIENCY</span
-            >
+           
             <h2 class="mt-1 text-sm font-semibold text-white">Skills</h2>
 
             <div class="mt-3 space-y-2">
@@ -1931,57 +1929,63 @@
             class="load-item rounded-xl border border-white/10 bg-pine p-4"
             style="--d: 700"
           >
-            <span class="text-[10px] tracking-[0.2em] text-leaf">TOOLS</span>
             <h2 class="mt-1 text-sm font-semibold text-white">Tech Stack</h2>
 
-            <div class="mt-3 flex flex-wrap gap-1.5">
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >HTML</span
-              >
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">CSS</span>
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >JavaScript</span
-              >
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >Java</span
-              >
+            <!-- 4 groups - 2 columns - borderless (labels only, no dividers) -->
+            <div class="mt-3 grid gap-3 sm:grid-cols-2">
+              <!-- UI -->
+              <div>
+                <h3 class="text-[10px] font-semibold tracking-[0.2em] text-leaf">
+                  FRONTEND
+                </h3>
+                <div class="mt-1.5 flex flex-wrap gap-1.5">
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">HTML</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">CSS</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">JavaScript</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">Figma</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">Canva</span>
+                </div>
+              </div>
 
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">PHP</span>
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >Laravel</span
-              >
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >MySQL</span
-              >
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >SQLite</span
-              >
-               <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >mariaDB</span
-              >
-               <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >AWS</span
-              >
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">Git</span>
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >Flutter</span
-              >
-               <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >Dart</span
-              >
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >Figma</span
-              >
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >Canva</span
-              >
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >Cline</span
-              >
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">GPT</span>
-              <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs"
-                >Gemini</span
-              >
+              <!-- BACKEND -->
+              <div>
+                <h3 class="text-[10px] font-semibold tracking-[0.2em] text-leaf">
+                  BACKEND
+                </h3>
+                <div class="mt-1.5 flex flex-wrap gap-1.5">
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">PHP</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">Laravel</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">Java</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">Flutter</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">Dart</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">AWS</span>
+                </div>
+              </div>
+
+              <!-- DATABASES -->
+              <div>
+                <h3 class="text-[10px] font-semibold tracking-[0.2em] text-leaf">
+                  DATABASES
+                </h3>
+                <div class="mt-1.5 flex flex-wrap gap-1.5">
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">MySQL</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">MariaDB</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">SQLite</span>
+                </div>
+              </div>
+
+              <!-- TOOLS -->
+              <div>
+                <h3 class="text-[10px] font-semibold tracking-[0.2em] text-leaf">
+                  TOOLS
+                </h3>
+                <div class="mt-1.5 flex flex-wrap gap-1.5">
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">Git</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">Cline</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">GPT</span>
+                  <span class="rounded-lg bg-white/5 px-3 py-1.5 text-xs">Gemini</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>

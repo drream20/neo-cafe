@@ -337,70 +337,6 @@
         }
       }
 
-      /* ===== "View Mobile" hover preview -- phone frame popover =====
-         Rendered at body level and positioned from JS: .tilt-card always
-         carries a transform, so a popover living inside a card would be
-         clipped by its overflow-hidden and offset from the trigger. */
-      .mobile-popover {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 70;
-        width: 150px;
-        aspect-ratio: 9 / 19.5;
-        border-radius: 16px;
-        border: 3px solid rgb(var(--border));
-        background: rgb(var(--pine));
-        overflow: hidden;
-        box-shadow: 0 18px 40px -12px rgb(0 0 0 / 0.55);
-        pointer-events: none; /* hover only -- never traps the cursor */
-        visibility: hidden;
-        opacity: 0;
-        transform: translateY(-6px) scale(0.96);
-        transition:
-          opacity 160ms ease-out,
-          transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
-      }
-
-      .mobile-popover.is-open {
-        visibility: visible;
-        opacity: 1;
-        transform: none;
-      }
-
-      .mobile-popover img {
-        display: block;
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-      }
-
-      /* Trigger -- plain text button sitting in the top-right corner of .p-3 */
-      .view-mobile-btn {
-        border: 0;
-        background: none;
-        padding: 0;
-        font-family: inherit;
-        font-size: 10px;
-        font-weight: 600;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: rgb(var(--muted));
-        cursor: pointer;
-        transition: color 160ms ease-out;
-      }
-
-      .view-mobile-btn:hover,
-      .view-mobile-btn:focus-visible {
-        color: rgb(var(--leaf));
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .mobile-popover {
-          transition: none;
-        }
-      }
-
       /* ===== Interactive tilt cards (Featured Projects) =====
          Cards follow the pointer in 3D (rotateX / rotateY) with a soft leaf
          glare underneath. JS feeds --rx / --ry / --gx / --gy; touch screens
@@ -1543,10 +1479,10 @@
               href="#github"
               class="mt-3 inline-flex items-center gap-1.5 text-xs text-leaf"
             >
-              View Activity
+              <!-- View Activity
               <svg class="hi h-3 w-3" aria-hidden="true">
                 <use href="#hi-chevron-right" />
-              </svg>
+              </svg> -->
             </a>
           </div>
 
@@ -1572,10 +1508,10 @@
               href="#skills-content"
               class="mt-3 inline-flex items-center gap-1.5 text-xs text-leaf"
             >
-              View Skills
+              <!-- View Skills
               <svg class="hi h-3 w-3" aria-hidden="true">
                 <use href="#hi-chevron-right" />
-              </svg>
+              </svg> -->
             </a>
           </div>
 
@@ -1601,10 +1537,10 @@
               href="#stack-content"
               class="mt-3 inline-flex items-center gap-1.5 text-xs text-leaf"
             >
-              View Stack
+              <!-- View Stack
               <svg class="hi h-3 w-3" aria-hidden="true">
                 <use href="#hi-chevron-right" />
-              </svg>
+              </svg> -->
             </a>
           </div>
 
@@ -1629,10 +1565,10 @@
               href="#projects"
               class="mt-3 inline-flex items-center gap-1.5 text-xs text-leaf"
             >
-              View Projects
+              <!-- View Projects
               <svg class="hi h-3 w-3" aria-hidden="true">
                 <use href="#hi-chevron-right" />
-              </svg>
+              </svg> -->
             </a>
           </div>
         </section>
@@ -1663,9 +1599,8 @@
             <!-- Projects -- horizontal scroll row -->
             <div class="projects-scroll mt-3">
               <!-- Project 1 -->
-              <a
-                href="./projects/projects.html#project-1"
-                class="tilt-card group block cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
+              <article
+                class="tilt-card group block overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
@@ -1675,23 +1610,14 @@
                     height="360"
                     loading="lazy"
                     decoding="async"
-                    class="h-full w-full object-cover"
+                    class="h-full w-full object-contain"
                   />
                 </div>
 
                 <div class="p-3">
-                  <div class="flex items-start justify-between gap-2">
-                    <h4 class="text-sm font-semibold text-white">
-                      School Voting System
-                    </h4>
-                    <span
-                      class="view-mobile-btn shrink-0"
-                      data-mobile-title="School Voting System"
-                      data-mobile-shot="assets/mobile/voting.png"
-                      data-mobile-fallback="assets/voting_system.png"
-                      >View Mobile</span
-                    >
-                  </div>
+                  <h4 class="text-sm font-semibold text-white">
+                    School Voting System
+                  </h4>
                   <div class="mt-2 flex flex-wrap gap-1.5">
                     <span
                       class="rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] text-slate-300"
@@ -1715,38 +1641,28 @@
                     >
                   </div>
                 </div>
-              </a>
+              </article>
 
               <!-- Project 2 -->
-              <a
-                href="./projects/projects.html#project-2"
-                class="tilt-card group block cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
+              <article
+                class="tilt-card group block overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
                     src="assets/spcas.png"
                     alt="school Website"
                     width="640"
-                    height="360"
+                    height="390"
                     loading="lazy"
                     decoding="async"
-                    class="h-full w-full object-cover"
+                    class="h-full w-full object-contain"
                   />
                 </div>
 
                 <div class="p-3">
-                  <div class="flex items-start justify-between gap-2">
-                    <h4 class="text-sm font-semibold text-white">
-                      School Website
-                    </h4>
-                    <span
-                      class="view-mobile-btn shrink-0"
-                      data-mobile-title="School Website"
-                      data-mobile-shot="assets/mobile/school-website.png"
-                      data-mobile-fallback="assets/spcas.png"
-                      >View Mobile</span
-                    >
-                  </div>
+                  <h4 class="text-sm font-semibold text-white">
+                    School Website
+                  </h4>
                   <div class="mt-2 flex flex-wrap gap-1.5">
                     <span
                       class="rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] text-slate-300"
@@ -1770,12 +1686,11 @@
                     >
                   </div>
                 </div>
-              </a>
+              </article>
 
               <!-- Project 3 -->
-              <a
-                href="./projects/projects.html#project-3"
-                class="tilt-card group block cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
+              <article
+                class="tilt-card group block overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
@@ -1785,21 +1700,12 @@
                     height="360"
                     loading="lazy"
                     decoding="async"
-                    class="h-full w-full object-cover"
+                    class="h-full w-full object-contain"
                   />
                 </div>
 
                 <div class="p-3">
-                  <div class="flex items-start justify-between gap-2">
-                    <h4 class="text-sm font-semibold text-white">Market Website</h4>
-                    <span
-                      class="view-mobile-btn shrink-0"
-                      data-mobile-title="Market Website"
-                      data-mobile-shot="assets/mobile/marketplace.png"
-                      data-mobile-fallback="assets/rcs.png"
-                      >View Mobile</span
-                    >
-                  </div>
+                  <h4 class="text-sm font-semibold text-white">Market Website</h4>
                   <div class="mt-2 flex flex-wrap gap-1.5">
                     <span
                       class="rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] text-slate-300"
@@ -1819,12 +1725,11 @@
                     >
                   </div>
                 </div>
-              </a>
+              </article>
 
               <!-- Project 4 -->
-              <a
-                href="./projects/projects.html#project-4"
-                class="tilt-card group block cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
+              <article
+                class="tilt-card group block overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
@@ -1834,21 +1739,12 @@
                     height="360"
                     loading="lazy"
                     decoding="async"
-                    class="h-full w-full object-cover"
+                    class="h-full w-full object-contain"
                   />
                 </div>
 
                 <div class="p-3">
-                  <div class="flex items-start justify-between gap-2">
-                    <h4 class="text-sm font-semibold text-white">Clothing Website</h4>
-                    <span
-                      class="view-mobile-btn shrink-0"
-                      data-mobile-title="Clothing Website"
-                      data-mobile-shot="assets/mobile/clothing.png"
-                      data-mobile-fallback="assets/empire.png"
-                      >View Mobile</span
-                    >
-                  </div>
+                  <h4 class="text-sm font-semibold text-white">Clothing Website</h4>
                   <div class="mt-2 flex flex-wrap gap-1.5">
                     <span
                       class="rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] text-slate-300"
@@ -1872,12 +1768,11 @@
                     >
                   </div>
                 </div>
-              </a>
+              </article>
 
               <!-- Project 5 -->
-              <a
-                href="./projects/projects.html#project-5"
-                class="tilt-card group block cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
+              <article
+                class="tilt-card group block overflow-hidden rounded-lg border border-white/10 bg-ink transition-colors hover:border-leaf/40"
               >
                 <div class="aspect-video bg-pine">
                   <img
@@ -1887,23 +1782,14 @@
                     height="360"
                     loading="lazy"
                     decoding="async"
-                    class="h-full w-full object-cover"
+                    class="h-full w-full object-contain"
                   />
                 </div>
 
                 <div class="p-3">
-                  <div class="flex items-start justify-between gap-2">
-                    <h4 class="text-sm font-semibold text-white">
-                      Inventory Management System
-                    </h4>
-                    <span
-                      class="view-mobile-btn shrink-0"
-                      data-mobile-title="Inventory Management System"
-                      data-mobile-shot="assets/mobile/inventory.png"
-                      data-mobile-fallback="assets/inventory.png"
-                      >View Mobile</span
-                    >
-                  </div>
+                  <h4 class="text-sm font-semibold text-white">
+                    Inventory Management System
+                  </h4>
                   <div class="mt-2 flex flex-wrap gap-1.5">
                   
                     <span
@@ -1928,7 +1814,7 @@
                     >
                   </div>
                 </div>
-              </a>
+              </article>
             </div>
           </div>
           <!-- ACTIVITY -->
@@ -2336,25 +2222,6 @@
         </footer>
       </div>
     </main>
-
-    <!-- "View Mobile" hover preview -- single shared instance, kept at body level
-         because .tilt-card's transform + overflow-hidden would clip it -->
-    <div
-      id="mobile-popover"
-      class="mobile-popover"
-      role="tooltip"
-      aria-hidden="true"
-    >
-      <img
-        id="mobile-popover-img"
-        alt=""
-        width="360"
-        height="780"
-        loading="lazy"
-        decoding="async"
-      />
-    </div>
-
     <!-- JAVASCRIPT -->
     <script>
       const sidebar = document.getElementById("sidebar");
@@ -2491,103 +2358,6 @@
             { passive: true },
           );
         });
-      })();
-
-      /* "View Mobile" hover preview --
-         One shared phone-frame popover that follows the hovered trigger. Hover
-         only: there is no click handler, and the popover is pointer-events:none
-         so it can never trap the cursor. The image path comes from
-         data-mobile-shot, with data-mobile-fallback used if it is missing. */
-      (function () {
-        var pop = document.getElementById("mobile-popover");
-        var img = document.getElementById("mobile-popover-img");
-        var triggers = document.querySelectorAll(".view-mobile-btn");
-        if (!pop || !img || !triggers.length) return;
-
-        var WIDTH = 150; /* keep in sync with .mobile-popover width */
-        var RATIO = 19.5 / 9;
-        var GAP = 8;
-        var EDGE = 8;
-        var active = null;
-
-        /* Hang the frame from the trigger's top-right corner, clamped to the
-           viewport -- flips above the trigger when there is no room below. */
-        function position() {
-          if (!active) return;
-          var r = active.getBoundingClientRect();
-          var h = pop.offsetHeight || WIDTH * RATIO;
-
-          var left = Math.max(
-            EDGE,
-            Math.min(r.right - WIDTH, window.innerWidth - WIDTH - EDGE),
-          );
-          var top = r.bottom + GAP;
-          if (top + h > window.innerHeight - EDGE) {
-            top = Math.max(EDGE, r.top - h - GAP);
-          }
-
-          pop.style.left = left + "px";
-          pop.style.top = top + "px";
-        }
-
-        function show(btn) {
-          var src = btn.getAttribute("data-mobile-shot");
-          if (!src) return;
-          active = btn;
-
-          if (img.getAttribute("src") !== src) {
-            img.setAttribute("src", src);
-            img.alt =
-              (btn.getAttribute("data-mobile-title") || "Project") +
-              " mobile view";
-          }
-
-          pop.setAttribute("aria-hidden", "false");
-          position();
-          pop.classList.add("is-open");
-        }
-
-        function hide() {
-          active = null;
-          pop.classList.remove("is-open");
-          pop.setAttribute("aria-hidden", "true");
-        }
-
-        triggers.forEach(function (btn) {
-          btn.addEventListener(
-            "pointerenter",
-            function () {
-              show(btn);
-            },
-            { passive: true },
-          );
-          /* Re-anchor while the card tilts in 3D so the frame stays glued */
-          btn.addEventListener("pointermove", position, { passive: true });
-          btn.addEventListener("pointerleave", hide, { passive: true });
-        });
-
-        /* Missing screenshot? Fall back to the project's desktop shot once,
-           then give up quietly so a broken-image icon never appears. */
-        img.addEventListener("error", function () {
-          var fb = active && active.getAttribute("data-mobile-fallback");
-          if (fb && img.getAttribute("src") !== fb) {
-            img.setAttribute("src", fb);
-            position();
-          } else {
-            hide();
-          }
-        });
-
-        img.addEventListener("load", position);
-
-        window.addEventListener(
-          "scroll",
-          function () {
-            if (active) position();
-          },
-          { passive: true },
-        );
-        window.addEventListener("resize", hide, { passive: true });
       })();
 
       /* GitHub contribution heatmap -- live data for drream20, cached fallback */

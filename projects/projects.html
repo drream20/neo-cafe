@@ -325,7 +325,7 @@
         }
       }
 
-      /* ===== "View Mobile" hover preview -- phone frame popover =====
+      /* ===== "View Mobile" preview -- phone frame popover (hover / tap) =====
          Rendered at body level and positioned from JS: .tilt-card always
          carries a transform, so a popover living inside a card would be
          clipped by its overflow-hidden and offset from the trigger. */
@@ -334,14 +334,16 @@
         top: 0;
         left: 0;
         z-index: 70;
-        width: 150px;
-        aspect-ratio: 9 / 19.5;
+        /* The frame hugs the screenshot: the <img> below carries the size caps,
+           so no fixed width is needed and it fits any screen. */
+        width: auto;
+        max-width: calc(100vw - 16px);
         border-radius: 16px;
         /* border: 3px solid rgb(var(--border)); */
         /* background: rgb(var(--pine)); */
         overflow: hidden;
         /* box-shadow: 0 18px 40px -12px rgb(0 0 0 / 0.55); */
-        pointer-events: none; /* hover only -- never traps the cursor */
+        pointer-events: none; /* the preview never steals the pointer */
         visibility: hidden;
         opacity: 0;
         transform: translateY(-6px) scale(0.96);
@@ -356,10 +358,21 @@
         transform: none;
       }
 
+      /* A touch-opened frame swallows its own taps so they cannot reach the
+         card link underneath */
+      .mobile-popover.is-touch {
+        pointer-events: auto;
+      }
+
       .mobile-popover img {
         display: block;
-        height: 100%;
-        width: 100%;
+        width: auto;
+        height: auto;
+        /* Scaled to fit: 150 x 325 on desktop, proportionally smaller on
+           phones, and capped in landscape so the frame never overflows. */
+        max-width: clamp(120px, 38vw, 150px);
+        max-height: min(56vh, 325px);
+        max-height: min(56dvh, 325px); /* dvh where supported */
         object-fit: contain;
       }
 
@@ -1691,47 +1704,85 @@
         });
       })();
 
-      /* "View Mobile" hover preview --
-         One shared phone-frame popover that follows the hovered trigger. Hover
-         only: there is no click handler, and the popover is pointer-events:none
-         so it can never trap the cursor. The image path comes from
-         data-mobile-shot, with data-mobile-fallback used if it is missing. */
+      /* "View Mobile" preview --
+         One shared phone-frame popover that follows its trigger: hovering opens
+         it and leaving closes it, while clicking/tapping pins it open (touch
+         devices have no hover). Sized and positioned from live measurements,
+         never from hard-coded pixels, so it fits phones too. The image path
+         comes from data-mobile-shot, with data-mobile-fallback used if the
+         mobile screenshot is missing. */
       (function () {
         var pop = document.getElementById("mobile-popover");
         var img = document.getElementById("mobile-popover-img");
         var triggers = document.querySelectorAll(".view-mobile-btn");
         if (!pop || !img || !triggers.length) return;
 
-        var WIDTH = 180; /* keep in sync with .mobile-popover width */
-        var RATIO = 19.5 / 9;
         var GAP = 8;
         var EDGE = 8;
         var active = null;
+        var pinned = false;
 
-        /* Hang the frame from the trigger's top-right corner, clamped to the
-           viewport -- flips above the trigger when there is no room below. */
+        /* The genuinely visible area -- visualViewport accounts for the mobile
+           toolbars that innerHeight still counts. */
+        function viewport() {
+          var vv = window.visualViewport;
+          return {
+            w: (vv && vv.width) || window.innerWidth,
+            h: (vv && vv.height) || window.innerHeight,
+          };
+        }
+
+        function narrow() {
+          return window.matchMedia("(max-width: 639px)").matches;
+        }
+
+        /* Measured size of the frame -- the CSS scales it with the viewport, so
+           a fixed 150 x 325 must never be assumed here. visibility:hidden keeps
+           layout, so offsetWidth/offsetHeight are already valid before showing. */
+        function metrics() {
+          var w = pop.offsetWidth;
+          var h = pop.offsetHeight;
+          if (!w || !h) {
+            h = Math.min(window.innerHeight * 0.56, 325);
+            w = h * (9 / 19.5);
+          }
+          return { w: w, h: h };
+        }
+
+        /* Anchor the frame to the trigger's right edge: below it when there is
+           room, above it when there is not, and centred on phones where the
+           trigger sits low in the single-column grid. */
         function position() {
           if (!active) return;
           var r = active.getBoundingClientRect();
-          var h = pop.offsetHeight || WIDTH * RATIO;
+          var m = metrics();
+          var vp = viewport();
 
           var left = Math.max(
             EDGE,
-            Math.min(r.right - WIDTH, window.innerWidth - WIDTH - EDGE),
+            Math.min(r.right - m.w, vp.w - m.w - EDGE),
           );
-          var top = r.bottom + GAP;
-          if (top + h > window.innerHeight - EDGE) {
-            top = Math.max(EDGE, r.top - h - GAP);
+
+          var top;
+          if (narrow()) {
+            top = (vp.h - m.h) / 2;
+          } else {
+            top = r.bottom + GAP;
+            if (top + m.h > vp.h - EDGE) top = r.top - m.h - GAP;
           }
+          if (top < EDGE) top = Math.max(EDGE, (vp.h - m.h) / 2);
+          /* Short windows: never let the frame run past the bottom edge */
+          top = Math.min(top, Math.max(EDGE, vp.h - m.h - EDGE));
 
           pop.style.left = left + "px";
           pop.style.top = top + "px";
         }
 
-        function show(btn) {
+        function show(btn, isPinned) {
           var src = btn.getAttribute("data-mobile-shot");
           if (!src) return;
           active = btn;
+          pinned = !!isPinned;
 
           if (img.getAttribute("src") !== src) {
             img.setAttribute("src", src);
@@ -1745,21 +1796,73 @@
 
         function hide() {
           active = null;
+          pinned = false;
           pop.classList.remove("is-open");
           pop.setAttribute("aria-hidden", "true");
         }
 
+        /* Touch devices have no hover, so a tap opens (and pins) the frame.
+           On hover-capable devices the frame swallows taps so its own surface
+           can never activate the card link underneath. */
+        var hoverCapable = window.matchMedia("(hover: hover)").matches;
+        if (!hoverCapable) pop.classList.add("is-touch");
+        else pop.classList.remove("is-touch");
+
         triggers.forEach(function (btn) {
           btn.addEventListener(
             "pointerenter",
-            function () {
-              show(btn);
+            function (e) {
+              /* Taps are handled by the click listener below */
+              if (e && e.pointerType === "touch") return;
+              show(btn, false);
             },
             { passive: true },
           );
           /* Re-anchor while the card tilts in 3D so the frame stays glued */
           btn.addEventListener("pointermove", position, { passive: true });
-          btn.addEventListener("pointerleave", hide, { passive: true });
+          btn.addEventListener(
+            "pointerleave",
+            function () {
+              if (!pinned) hide();
+            },
+            { passive: true },
+          );
+
+          /* Click / tap: open, or close when this trigger is already pinned */
+          btn.addEventListener("click", function (e) {
+            e.preventDefault(); /* index.html: the trigger sits inside <a> */
+            e.stopPropagation();
+            if (active === btn && pinned && pop.classList.contains("is-open")) {
+              hide();
+            } else {
+              show(btn, true);
+            }
+          });
+
+          /* Enter / Space -- the index.html triggers are spans, not buttons */
+          btn.addEventListener("keydown", function (e) {
+            if (e.key !== "Enter" && e.key !== " " && e.key !== "Spacebar") return;
+            e.preventDefault();
+            if (active === btn && pinned) hide();
+            else show(btn, true);
+          });
+        });
+
+        /* A tap / click outside the frame and its trigger closes it */
+        document.addEventListener(
+          "pointerdown",
+          function (e) {
+            if (!active) return;
+            var t = e.target;
+            if (t === pop || (t && pop.contains(t))) return;
+            if (t === active || (t && active.contains(t))) return;
+            hide();
+          },
+          { passive: true },
+        );
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") hide();
         });
 
         /* Missing screenshot? Fall back to the project's desktop shot once,
@@ -1784,6 +1887,16 @@
           { passive: true },
         );
         window.addEventListener("resize", hide, { passive: true });
+
+        /* Mobile: rotate, URL bar collapsing, on-screen keyboard */
+        if (window.visualViewport) {
+          window.visualViewport.addEventListener("resize", function () {
+            if (active) position();
+          });
+          window.visualViewport.addEventListener("scroll", function () {
+            if (active) position();
+          });
+        }
       })();
 
       /* GitHub contribution heatmap -- live data for drream20, cached fallback */

@@ -1,0 +1,3 @@
+ABORTED — anchors not as expected:
+  - header block anchor not found
+  - expected 5 view-mobile-btn in the markup
